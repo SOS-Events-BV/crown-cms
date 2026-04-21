@@ -17,15 +17,18 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "SOS Events BV",
-            "email": "ict@sos-events.nl",
+            "name": "Steven Erik Martijn Roest",
+            "email": "steven@sosevents.nl",
             "role": "Developer"
         }
     ],
     "require": {
         "php": "^8.2",
         "filament/filament": "^5.0",
-        "spatie/laravel-package-tools": "^1.15.0"
+        "spatie/laravel-package-tools": "^1.15.0",
+        "laravel/ai": "^0.6.0",
+        "spatie/laravel-medialibrary": "^11.21.0",
+        "spatie/laravel-settings": "^3.7.2"
     },
     "require-dev": {
         "nunomaduro/collision": "^8.0",

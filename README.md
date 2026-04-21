@@ -42,7 +42,7 @@ composer test
 
 ## Credits
 
-- [SOS Events BV](https://github.com/SOS-Events-BV)
+- [Steven Roest](https://github.com/stevenemr)
 - [All Contributors](https://github.com/SOS-Events-BV/crown-cms/contributors)
 
 ## License
