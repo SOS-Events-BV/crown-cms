@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace SOSEventsBV\CrownCms\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class CrownCmsCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'crown-cms';
 
     public $description = 'My command';
 
