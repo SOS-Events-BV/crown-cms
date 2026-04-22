@@ -30,7 +30,9 @@
         "spatie/laravel-medialibrary": "^11.21.0",
         "spatie/laravel-settings": "^3.7.2",
         "spatie/laravel-honeypot": "^4.7.1",
-        "pboivin/filament-peek": "^v4.1.2"
+        "pboivin/filament-peek": "^v4.1.2",
+        "spatie/schema-org": "^4.0.2",
+        "anhskohbo/no-captcha": "^3.8.0"
     },
     "require-dev": {
         "nunomaduro/collision": "^8.0",

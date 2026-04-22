@@ -10,6 +10,7 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use SOSEventsBV\CrownCms\FilamentComponents\SeoSettings;
+use SOSEventsBV\CrownCms\FilamentComponents\ContentBuilder;
 
 class PageForm
 {
@@ -75,7 +76,7 @@ class PageForm
                     ->columnSpanFull(),
 
                 // Page Builder
-//                ContentBuilder::make('content'),
+                ContentBuilder::make('content'),
             ]);
     }
 }

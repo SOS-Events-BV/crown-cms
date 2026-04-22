@@ -40,13 +40,11 @@ class EditPage extends EditRecord
     /**
      * Overwrite the preview modal view to use the show view.
      *
-     * This corresponds to resources/views/page/show.blade.php
-     *
      * @return string|null
      */
     protected function getPreviewModalView(): ?string
     {
-        return 'page.show';
+        return 'page';
     }
 
     /**

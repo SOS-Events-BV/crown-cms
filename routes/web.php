@@ -11,15 +11,15 @@ Route::prefix(config('crown-cms.routing.prefix', ''))
     ->middleware(config('crown-cms.routing.middleware', ['web']))
     ->group(function () {
         Route::post('/{slug}/submit', [PageController::class, 'submitForm'])
-            ->where('slug', '.*')
+            ->where('slug', '.+')
             ->name('page.submit')
             ->middleware([ProtectAgainstSpam::class, 'throttle:5,2']); // Honeypot and throttle (max 5 submissions per 2 minutes).
 
         Route::get('/{slug}/success', [PageController::class, 'showSuccess'])
-            ->where('slug', '.*')
+            ->where('slug', '.+')
             ->name('page.success');
 
         Route::get('/{slug}', [PageController::class, 'show'])
-            ->where('slug', '.*')
+            ->where('slug', '.+')
             ->name('page');
     });

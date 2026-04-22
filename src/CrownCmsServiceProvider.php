@@ -5,6 +5,7 @@ namespace SOSEventsBV\CrownCms;
 use Filament\Support\Assets\Asset;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
+use Illuminate\View\Compilers\BladeCompiler;
 use Livewire\Features\SupportTesting\Testable;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
@@ -28,13 +29,15 @@ class CrownCmsServiceProvider extends PackageServiceProvider
         $package->name(static::$name)
             ->hasCommands($this->getCommands())
             ->discoversMigrations()
-            ->hasRoute('web')
             ->hasInstallCommand(function (InstallCommand $command) {
                 $command
                     ->publishConfigFile()
                     ->publishMigrations()
                     ->askToRunMigrations()
                     ->endWith(function (InstallCommand $command) {
+                        $command->call('vendor:publish', [
+                            '--tag' => 'crown-cms-layout',
+                        ]);
                         $command->call('filament:assets');
                     });
             });
@@ -71,6 +74,19 @@ class CrownCmsServiceProvider extends PackageServiceProvider
 
         // Icon Registration
         FilamentIcon::register($this->getIcons());
+
+        // Add routes to the website of the user
+        $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+
+        // Add components to the website of the user
+        $this->callAfterResolving(BladeCompiler::class, function (BladeCompiler $blade) {
+            $blade->componentNamespace('SOSEventsBV\\CrownCms\\Components', 'crown-cms');
+        });
+
+        // Publish the layout
+        $this->publishes([
+            __DIR__ . '/../resources/views/components/layout.blade.php' => resource_path('views/components/layout.blade.php')
+        ], 'crown-cms-layout');
 
         // Testing
         Testable::mixin(new TestsCrownCms);

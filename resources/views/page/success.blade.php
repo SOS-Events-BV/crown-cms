@@ -1,19 +1,17 @@
-@extends(config('crown-cms.layout'))
+<x-dynamic-component
+    :component="config('crown-cms.layout')"
+    :title="$page->seo?->page_title"
+    :description="$page->seo?->page_description"
+    :keywords="$page->seo?->page_keywords"
+    :og_title="$page->seo?->og_title"
+    :og_description="$page->seo?->og_description"
+    :og_image="$page->seo?->og_image"
+>
+    <div class="container py-15 mx-auto">
+        <div class="prose">
+            <h1>{{ $title }}</h1>
 
-@isset($page->seo)
-    {{-- Meta --}}
-    @section('title', $page->seo->page_title)
-    @section('description', $page->seo->page_description)
-    @section('keywords', $page->seo->page_keywords)
-
-    {{-- OG --}}
-    @section('og_title', $page->seo->og_title)
-    @section('og_description', $page->seo->og_description)
-    @section('og_image', $page->seo->og_image)
-@endisset
-
-@section('content')
-    <h1>{{ $title }}</h1>
-
-    <div>{!! $message !!}</div>
-@endsection
+            <div>{!! $message !!}</div>
+        </div>
+    </div>
+</x-dynamic-component>

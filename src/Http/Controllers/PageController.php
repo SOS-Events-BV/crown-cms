@@ -45,15 +45,15 @@ class PageController
         // Find the form block in the page content
         $pageForm = collect($page->content_objects)->firstWhere('type', 'form_builder_block');
 
-        if (!$pageForm || !isset($pageForm['data']['form_inputs'])) {
+        if (!$pageForm || !isset($pageForm->data->form_inputs)) {
             abort(404); // Form block or inputs not found
         }
 
         // Build validation rules dynamically from the form config
-        $rules = collect($pageForm['data']['form_inputs'])
+        $rules = collect($pageForm->data->form_inputs)
             ->mapWithKeys(function ($input) {
-                $name = Str::slug($input['data']['label'], '_');
-                $required = $input['data']['required'] ?? false;
+                $name = Str::slug($input->data->label, '_');
+                $required = $input->data->required ?? false;
 
                 return [$name => $required ? 'required' : 'nullable'];
             })
@@ -78,7 +78,7 @@ class PageController
             ->toArray();
 
         // Send email to the given email with form data
-        $email = $pageForm['data']['email'];
+        $email = $pageForm->data->email;
         Mail::to($email)->send(new PageFormMail($slug, $formData));
 
         return redirect()->route('page.success', $slug);
@@ -96,16 +96,16 @@ class PageController
 
         $formBlock = collect($page->content_objects)->firstWhere('type', 'form_builder_block');
 
-        if (!$formBlock || !isset($formBlock['data'])) {
+        if (!$formBlock || !$formBlock->data) {
             abort(404); // Form block not found
         }
 
-        $successMessage = $formBlock['data'];
+        $successMessage = $formBlock->data;
 
         return view('crown-cms::page.success', [
             'page' => $page,
-            'title' => $successMessage['title'] ?? 'Bedankt!',
-            'message' => $successMessage['message'] ?? 'Je formulier is succesvol verzonden.',
+            'title' => $successMessage->title ?? 'Bedankt!',
+            'message' => $successMessage->message ?? 'Je formulier is succesvol verzonden.',
         ]);
     }
 }
