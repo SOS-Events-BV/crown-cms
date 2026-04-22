@@ -4,6 +4,7 @@ namespace SOSEventsBV\CrownCms;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
+use SOSEventsBV\CrownCms\Resources\Users\UserResource;
 
 class CrownCmsPlugin implements Plugin
 {
@@ -14,7 +15,10 @@ class CrownCmsPlugin implements Plugin
 
     public function register(Panel $panel): void
     {
-        //
+        $panel
+            ->resources([
+                UserResource::class
+            ]);
     }
 
     public function boot(Panel $panel): void

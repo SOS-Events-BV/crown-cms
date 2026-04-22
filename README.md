@@ -4,30 +4,23 @@ This package provides a CMS panel plugin for Filament for websites of SOS Events
 
 ## Installation
 
-You can publish and run the migrations with:
+After adding the package to your project, you can install the plugin by running:
 
 ```bash
-php artisan vendor:publish --tag="crown-cms-migrations"
-php artisan migrate
+php artisan crown-cms:install
 ```
 
-You can publish the config file with:
+This will ask if you want to run the migrations. If you haven't run the migrations yet, make sure you select yes. If you have already run the migrations, please delete all tables and run the migrations again.
 
-```bash
-php artisan vendor:publish --tag="crown-cms-config"
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="crown-cms-views"
-```
-
-This is the contents of the published config file:
+Because we make changes to the User model, we need to add the `HasCrownCmsFields` trait to the User model. This can be done by adding the following line to the `App\Models\User` model:
 
 ```php
-return [
-];
+class User extends Authenticatable implements FilamentUser
+{
+    use HasCrownCmsFields; // There can be multiple traits, use a comma to separate them
+
+    // ... The rest of the User model
+}
 ```
 
 ## Usage
