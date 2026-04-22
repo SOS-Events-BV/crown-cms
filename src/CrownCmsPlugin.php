@@ -3,11 +3,14 @@
 namespace SOSEventsBV\CrownCms;
 
 use Filament\Contracts\Plugin;
+use Filament\Navigation\NavigationGroup;
 use Filament\Panel;
 use Pboivin\FilamentPeek\FilamentPeekPlugin;
+use SOSEventsBV\CrownCms\Resources\Categories\CategoryResource;
 use SOSEventsBV\CrownCms\Resources\Events\EventResource;
 use SOSEventsBV\CrownCms\Resources\FaqPageQuestions\FaqPageQuestionResource;
 use SOSEventsBV\CrownCms\Resources\Pages\PageResource;
+use SOSEventsBV\CrownCms\Resources\Products\ProductResource;
 use SOSEventsBV\CrownCms\Resources\Redirects\RedirectResource;
 use SOSEventsBV\CrownCms\Resources\Reviews\ReviewResource;
 use SOSEventsBV\CrownCms\Resources\Users\UserResource;
@@ -32,6 +35,13 @@ class CrownCmsPlugin implements Plugin
                 ReviewResource::class,
                 FaqPageQuestionResource::class,
                 EventResource::class,
+                CategoryResource::class,
+                ProductResource::class,
+            ])
+            ->navigationGroups([
+                NavigationGroup::make()->label('Pagina\'s'),
+                NavigationGroup::make()->label('Producten'),
+                NavigationGroup::make()->label('Instellingen'),
             ]);
     }
 
