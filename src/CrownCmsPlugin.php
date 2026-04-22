@@ -6,6 +6,7 @@ use Filament\Contracts\Plugin;
 use Filament\Navigation\NavigationGroup;
 use Filament\Panel;
 use Pboivin\FilamentPeek\FilamentPeekPlugin;
+use SOSEventsBV\CrownCms\Pages\ManageCompany;
 use SOSEventsBV\CrownCms\Resources\Categories\CategoryResource;
 use SOSEventsBV\CrownCms\Resources\Events\EventResource;
 use SOSEventsBV\CrownCms\Resources\FaqPageQuestions\FaqPageQuestionResource;
@@ -27,6 +28,9 @@ class CrownCmsPlugin implements Plugin
         $panel
             ->plugins([
                 FilamentPeekPlugin::make(),
+            ])
+            ->pages([
+                ManageCompany::class
             ])
             ->resources([
                 PageResource::class,

@@ -30,6 +30,7 @@
         "spatie/laravel-medialibrary": "^11.21.0",
         "filament/spatie-laravel-media-library-plugin": "^v5.6.0",
         "spatie/laravel-settings": "^3.7.2",
+        "filament/spatie-laravel-settings-plugin": "^v5.6.0",
         "spatie/laravel-honeypot": "^4.7.1",
         "pboivin/filament-peek": "^v4.1.2",
         "spatie/schema-org": "^4.0.2",
