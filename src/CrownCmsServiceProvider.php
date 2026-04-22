@@ -7,10 +7,11 @@ use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\View\Compilers\BladeCompiler;
 use Livewire\Features\SupportTesting\Testable;
+use SOSEventsBV\CrownCms\Commands\FetchCurrencies;
+use SOSEventsBV\CrownCms\Commands\FetchReviews;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use SOSEventsBV\CrownCms\Commands\CrownCmsCommand;
 use SOSEventsBV\CrownCms\Testing\TestsCrownCms;
 
 class CrownCmsServiceProvider extends PackageServiceProvider
@@ -115,7 +116,8 @@ class CrownCmsServiceProvider extends PackageServiceProvider
     protected function getCommands(): array
     {
         return [
-            CrownCmsCommand::class,
+            FetchCurrencies::class,
+            FetchReviews::class
         ];
     }
 

@@ -7,6 +7,7 @@ use Filament\Panel;
 use Pboivin\FilamentPeek\FilamentPeekPlugin;
 use SOSEventsBV\CrownCms\Resources\Pages\PageResource;
 use SOSEventsBV\CrownCms\Resources\Redirects\RedirectResource;
+use SOSEventsBV\CrownCms\Resources\Reviews\ReviewResource;
 use SOSEventsBV\CrownCms\Resources\Users\UserResource;
 
 class CrownCmsPlugin implements Plugin
@@ -26,6 +27,7 @@ class CrownCmsPlugin implements Plugin
                 PageResource::class,
                 UserResource::class,
                 RedirectResource::class,
+                ReviewResource::class
             ]);
     }
 

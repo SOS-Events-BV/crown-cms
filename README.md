@@ -62,26 +62,26 @@ We also have a few environment variables that are required for the plugin to wor
 
 ```dotenv
 # LeisureKing API
-LEISUREKING_API_URL="https://api.leisureking.eu/public"
-LEISUREKING_API_VERSION="v4"
-LEISUREKING_API_USERNAME=""
-LEISUREKING_API_PASSWORD=""
-LEISUREKING_API_ENVIRONMENT="test" # test or production
-LEISUREKING_API_SHOPHID=""
+CROWNCMS_LEISUREKING_API_URL="https://api.leisureking.eu/public"
+CROWNCMS_LEISUREKING_API_VERSION="v4"
+CROWNCMS_LEISUREKING_API_USERNAME=""
+CROWNCMS_LEISUREKING_API_PASSWORD=""
+CROWNCMS_LEISUREKING_API_ENVIRONMENT="test" # test or production
+CROWNCMS_LEISUREKING_API_SHOPHID=""
 
 # Weglot (is optional)
-WEGLOT_API_KEY=""
+CROWNCMS_WEGLOT_API_KEY=""
 
 # Reviews API
-REVIEW_API_URL="https://reageren.sosevents.nl/api"
-REVIEW_API_KEY=""
-REVIEW_API_SHOP_ID=""
+CROWNCMS_REVIEW_API_URL="https://reageren.sosevents.nl/api"
+CROWNCMS_REVIEW_API_KEY=""
+CROWNCMS_REVIEW_API_SHOP_ID=""
 
-# Recaptcha / No captcha keys
+# Recaptcha / No captcha keys (no CROWNCMS_ prefix, is from the nocaptcha package)
 NOCAPTCHA_SECRET=
 NOCAPTCHA_SITEKEY=
 
-# AI (optional)
+# AI (optional) (from the laravel/ai package)
 ANTHROPIC_API_KEY=
 COHERE_API_KEY=
 ELEVENLABS_API_KEY=

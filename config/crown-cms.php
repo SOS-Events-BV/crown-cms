@@ -29,8 +29,23 @@ return [
      * All the services that are used by the CrownCms plugin.
      */
     'services' => [
+        'leisureking' => [
+            'url' => env('CROWNCMS_LEISUREKING_API_URL', 'https://api.leisureking.eu/public'),
+            'version' => env('CROWNCMS_LEISUREKING_API_VERSION', 'v4'),
+            'username' => env('CROWNCMS_LEISUREKING_API_USERNAME'),
+            'password' => env('CROWNCMS_LEISUREKING_API_PASSWORD'),
+            'environment' => env('CROWNCMS_LEISUREKING_API_ENVIRONMENT', 'test'),
+            'shophid' => env('CROWNCMS_LEISUREKING_API_SHOPHID'),
+        ],
+
         'weglot' => [
-            'api_key' => env('WEGLOT_API_KEY'),
+            'api_key' => env('CROWNCMS_WEGLOT_API_KEY'),
+        ],
+
+        'review' => [
+            'url' => env('CROWNCMS_REVIEW_API_URL', 'https://reageren.sosevents.nl/api'),
+            'api_key' => env('CROWNCMS_REVIEW_API_KEY'),
+            'shop_id' => env('CROWNCMS_REVIEW_API_SHOP_ID'),
         ]
     ]
 ];
