@@ -28,6 +28,7 @@
         "spatie/laravel-package-tools": "^1.15.0",
         "laravel/ai": "^0.6.0",
         "spatie/laravel-medialibrary": "^11.21.0",
+        "filament/spatie-laravel-media-library-plugin": "^v5.6.0",
         "spatie/laravel-settings": "^3.7.2",
         "spatie/laravel-honeypot": "^4.7.1",
         "pboivin/filament-peek": "^v4.1.2",

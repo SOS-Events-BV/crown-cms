@@ -5,6 +5,7 @@ namespace SOSEventsBV\CrownCms;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 use Pboivin\FilamentPeek\FilamentPeekPlugin;
+use SOSEventsBV\CrownCms\Resources\Events\EventResource;
 use SOSEventsBV\CrownCms\Resources\FaqPageQuestions\FaqPageQuestionResource;
 use SOSEventsBV\CrownCms\Resources\Pages\PageResource;
 use SOSEventsBV\CrownCms\Resources\Redirects\RedirectResource;
@@ -30,6 +31,7 @@ class CrownCmsPlugin implements Plugin
                 RedirectResource::class,
                 ReviewResource::class,
                 FaqPageQuestionResource::class,
+                EventResource::class,
             ]);
     }
 
