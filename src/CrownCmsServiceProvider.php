@@ -36,9 +36,6 @@ class CrownCmsServiceProvider extends PackageServiceProvider
                     ->publishMigrations()
                     ->askToRunMigrations()
                     ->endWith(function (InstallCommand $command) {
-                        $command->call('vendor:publish', [
-                            '--tag' => 'crown-cms-layout',
-                        ]);
                         $command->call('filament:assets');
                     });
             });
@@ -83,11 +80,6 @@ class CrownCmsServiceProvider extends PackageServiceProvider
         $this->callAfterResolving(BladeCompiler::class, function (BladeCompiler $blade) {
             $blade->componentNamespace('SOSEventsBV\\CrownCms\\Components', 'crown-cms');
         });
-
-        // Publish the layout
-        $this->publishes([
-            __DIR__ . '/../resources/views/components/layout.blade.php' => resource_path('views/components/layout.blade.php')
-        ], 'crown-cms-layout');
 
         // Testing
         Testable::mixin(new TestsCrownCms);

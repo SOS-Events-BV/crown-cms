@@ -12,8 +12,6 @@ php artisan crown-cms:install
 
 This will ask if you want to run the migrations. If you haven't run the migrations yet, make sure you select yes. If you have already run the migrations, please delete all tables and run the migrations again.
 
-The layout file is always published in your `resources/views/components/layout.blade.php` file. This doesn't contain the Vite assets yet. You can add them yourself.
-
 Because we make changes to the User model, we need to add the `HasCrownCmsFields` trait to the User model. This can be done by adding the following line to the `App\Models\User` model:
 
 ```php
@@ -108,6 +106,29 @@ The page view uses a `text-format` class for content formatting. Add the followi
 Make sure you have the `@tailwindcss/typography` plugin installed.
 
 _* This is not required, but this makes the page builder pages look a bit nicer._
+
+## Requirements
+
+This plugin requires a `layout` Blade component in your project with the following props:
+
+```php
+@props([
+    'title' => config('app.name'),
+    'description' => '',
+    'keywords' => null,
+    'og_title' => null,
+    'og_description' => null,
+    'og_image' => null,
+])
+```
+
+If you are using the [Crown CMS Template](https://github.com/sos-events-bv/website-template), this is already included.
+
+You can change the layout component in the config:
+
+```php
+'layout' => 'layout', // x-layout
+```
 
 ## Usage
 
