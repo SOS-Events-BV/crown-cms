@@ -2,13 +2,13 @@
 
 namespace SOSEventsBV\CrownCms\Resources\Pages;
 
-use SOSEventsBV\CrownCms\Models\Page;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use SOSEventsBV\CrownCms\Models\Page;
 use SOSEventsBV\CrownCms\Resources\Pages\Pages\CreatePage;
 use SOSEventsBV\CrownCms\Resources\Pages\Pages\EditPage;
 use SOSEventsBV\CrownCms\Resources\Pages\Pages\ListPages;
@@ -19,7 +19,7 @@ class PageResource extends Resource
 {
     protected static ?string $model = Page::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::DocumentText;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
 
     protected static ?string $recordTitleAttribute = 'seo.page_title';
 

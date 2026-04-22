@@ -2,13 +2,13 @@
 
 namespace SOSEventsBV\CrownCms\Http\Controllers;
 
-use SOSEventsBV\CrownCms\Mail\PageFormMail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
+use SOSEventsBV\CrownCms\Mail\PageFormMail;
 use SOSEventsBV\CrownCms\Models\Page;
 
 class PageController

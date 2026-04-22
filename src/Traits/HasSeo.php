@@ -2,8 +2,8 @@
 
 namespace SOSEventsBV\CrownCms\Traits;
 
-use SOSEventsBV\CrownCms\Models\SeoMeta;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use SOSEventsBV\CrownCms\Models\SeoMeta;
 
 trait HasSeo
 {

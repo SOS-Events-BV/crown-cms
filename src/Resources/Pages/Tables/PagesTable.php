@@ -56,7 +56,7 @@ class PagesTable
                             Action::make('createRedirect')
                                 ->label('Redirect aanmaken')
                                 ->button()
-//                                ->url(route('filament.admin.resources.redirects.index'))
+                                ->url(route('filament.admin.resources.redirects.index'))
                         ])
                     ),
             ])

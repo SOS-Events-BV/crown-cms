@@ -42,6 +42,20 @@ public function panel(Panel $panel): Panel
 }
 ```
 
+### Redirecting
+
+The CMS has a redirect feature built in. If you want to have redirects, you must add the following to your withMiddleware function in the `bootstap/app.php` file:
+```php
+use SOSEventsBV\CrownCms\Middleware\HandleRedirects;
+
+return Application::configure(basePath: dirname(__DIR__))
+    // ...
+    ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->append(HandleRedirects::class);
+    })
+    // ...
+```
+
 ### Environment variables
 
 We also have a few environment variables that are required for the plugin to work. You need to fill this in with your own values and keys. Please add these to your `.env` file and `.env.example` file (but without the values 😉).

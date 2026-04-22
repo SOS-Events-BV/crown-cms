@@ -2,9 +2,9 @@
 
 namespace SOSEventsBV\CrownCms\Models;
 
-use SOSEventsBV\CrownCms\Traits\HasSeo;
-use SOSEventsBV\CrownCms\Traits\HasContentBlocks;
 use Illuminate\Database\Eloquent\Model;
+use SOSEventsBV\CrownCms\Traits\HasContentBlocks;
+use SOSEventsBV\CrownCms\Traits\HasSeo;
 
 class Page extends Model
 {

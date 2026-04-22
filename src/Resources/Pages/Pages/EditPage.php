@@ -6,10 +6,10 @@ use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
-use SOSEventsBV\CrownCms\Models\Page;
-use SOSEventsBV\CrownCms\Resources\Pages\PageResource;
 use Pboivin\FilamentPeek\Pages\Actions\PreviewAction;
 use Pboivin\FilamentPeek\Pages\Concerns\HasPreviewModal;
+use SOSEventsBV\CrownCms\Models\Page;
+use SOSEventsBV\CrownCms\Resources\Pages\PageResource;
 
 /**
  * @property Page $record
