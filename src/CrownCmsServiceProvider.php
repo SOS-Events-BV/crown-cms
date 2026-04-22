@@ -28,11 +28,15 @@ class CrownCmsServiceProvider extends PackageServiceProvider
         $package->name(static::$name)
             ->hasCommands($this->getCommands())
             ->discoversMigrations()
+            ->hasRoute('web')
             ->hasInstallCommand(function (InstallCommand $command) {
                 $command
                     ->publishConfigFile()
                     ->publishMigrations()
-                    ->askToRunMigrations();
+                    ->askToRunMigrations()
+                    ->endWith(function (InstallCommand $command) {
+                        $command->call('filament:assets');
+                    });
             });
 
         $configFileName = $package->shortName();

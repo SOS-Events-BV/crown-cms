@@ -12,7 +12,7 @@ return new class extends Migration
             $table->string('slug')->unique(); // Unique slug for page, can be with slashes
 
             // Content
-            $table->json('content');
+            $table->json('content')->default('[]');
 
             // Settings
             $table->boolean('is_active')->default(true);
