@@ -73,8 +73,10 @@ class CrownCmsServiceProvider extends PackageServiceProvider
         // Icon Registration
         FilamentIcon::register($this->getIcons());
 
-        // Add routes to the website of the user
-        $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+        // Register routes after all other service providers, so catch-all routes are last
+        $this->app->booted(function () {
+            $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+        });
 
         // Add components to the website of the user
         $this->callAfterResolving(BladeCompiler::class, function (BladeCompiler $blade) {

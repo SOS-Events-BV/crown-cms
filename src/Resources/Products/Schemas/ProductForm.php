@@ -243,16 +243,20 @@ class ProductForm
                                 Fieldset::make('Pagina instellingen')
                                     ->schema([
                                         Toggle::make('is_active')
-                                            ->label('Pagina actief')
+                                            ->label('Product actief')
                                             ->inline(false)
                                             ->default(true),
 
                                         // Clickable URL to the page
                                         TextEntry::make('url')
                                             ->hiddenOn('create')
-                                            ->label('Bekijk pagina')
+                                            ->label('Bekijk product')
                                             ->state('Klik hier')
-//                                            ->url(fn($record) => route('product.show', $record->slug))
+                                            ->url(fn($record) => config('crown-cms.routes.product') ?
+                                                route(config('crown-cms.routes.product'), $record->slug) :
+                                                null
+                                            )
+                                            ->hidden(fn(Get $get) => !$get('is_active') || !config('crown-cms.routes.product'))
                                             ->icon(Heroicon::Link)
                                             ->openUrlInNewTab()
                                             ->color('primary'),

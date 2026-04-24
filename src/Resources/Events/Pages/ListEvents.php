@@ -19,7 +19,8 @@ class ListEvents extends ListRecords
             Action::make('showEventsPage')
                 ->label('Toon evenementen pagina')
                 ->icon(Heroicon::Users)
-//                ->url(route('events'))
+                ->url(config('crown-cms.routes.events') ? route(config('crown-cms.routes.events')) : null)
+                ->hidden(!config('crown-cms.routes.events'))
                 ->color('gray')
                 ->openUrlInNewTab(),
 

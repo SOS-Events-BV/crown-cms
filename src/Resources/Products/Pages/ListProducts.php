@@ -18,7 +18,8 @@ class ListProducts extends ListRecords
             Action::make('showProductsPage')
                 ->label('Toon alle producten pagina')
                 ->icon(Heroicon::ShoppingBag)
-//                ->url(route('products'))
+                ->url(config('crown-cms.routes.products') ? route(config('crown-cms.routes.products')) : null)
+                ->hidden(!config('crown-cms.routes.products'))
                 ->color('gray')
                 ->openUrlInNewTab(),
 

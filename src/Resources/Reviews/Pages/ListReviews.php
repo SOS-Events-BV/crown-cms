@@ -22,7 +22,8 @@ class ListReviews extends ListRecords
             Action::make('showReviewPage')
                 ->label('Toon reviews pagina')
                 ->icon(Heroicon::Users)
-//                ->url(route('reviews'))
+                ->url(config('crown-cms.routes.reviews') ? route(config('crown-cms.routes.reviews')) : null)
+                ->hidden(!config('crown-cms.routes.reviews'))
                 ->openUrlInNewTab()
         ];
     }

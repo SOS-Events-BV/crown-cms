@@ -25,23 +25,25 @@ class PageForm
                         // SEO Settings component
                         SeoSettings::make('page/og'),
 
-                        Grid::make(2)->schema([
-                            // Clickable URL to the page
-                            TextEntry::make('url')
-                                ->hiddenOn('create')
-                                ->label('Bekijk pagina')
-                                ->state('Klik hier')
-                                ->url(fn($record) => route('page', $record->slug)) // URL that will be opened
-                                ->icon(Heroicon::Link)
-                                ->openUrlInNewTab() // Open the URL in a new tab
-                                ->color('primary'),
+                        Grid::make(2)->schema(array_filter([
+                            config('crown-cms.routes.page') ?
+                                // Clickable URL to the page
+                                TextEntry::make('url')
+                                    ->hiddenOn('create')
+                                    ->label('Bekijk pagina')
+                                    ->state('Klik hier')
+                                    ->url(fn($record) => route(config('crown-cms.routes.page'), $record->slug)) // URL that will be opened
+                                    ->icon(Heroicon::Link)
+                                    ->color('primary')
+                                    ->openUrlInNewTab() // Open the URL in a new tab
+                                : null,
 
                             // Toggle for active status
                             Toggle::make('is_active')
                                 ->label('Pagina actief')
                                 ->inline(false)
                                 ->default(true),
-                        ]),
+                        ])),
 
                         // Created by and updated by with timestamps
                         Grid::make(2)->hiddenOn('create')->schema([

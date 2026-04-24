@@ -27,9 +27,12 @@ class CategoriesTable
 
                 TextColumn::make('slug')
                     ->label('Pagina')
-//                    ->url(fn($record) => route('category', $record->slug)) // URL that will be opened
-                    ->icon(Heroicon::Link)
-                    ->color('primary')
+                    ->url(fn($record) => config('crown-cms.routes.category') ?
+                        route(config('crown-cms.routes.category'), $record->slug) :
+                        null
+                    ) // URL that will be opened
+                    ->icon(config('crown-cms.routes.category') ? Heroicon::Link : null)
+                    ->color(config('crown-cms.routes.category') ? 'primary' : null)
                     ->openUrlInNewTab(), // Open the URL in a new tab,
 
                 ToggleColumn::make('is_active')

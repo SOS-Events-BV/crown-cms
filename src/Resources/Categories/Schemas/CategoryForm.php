@@ -30,23 +30,25 @@ class CategoryForm
                     ->schema([
                         SeoSettings::make('category/og'),
 
-                        Grid::make(2)->schema([
-                            // Clickable URL to the page
-                            TextEntry::make('url')
-                                ->hiddenOn('create')
-                                ->label('Bekijk pagina')
-                                ->state('Klik hier')
-//                                ->url(fn($record) => route('category', $record->slug)) // URL that will be opened
-                                ->icon(Heroicon::Link)
-                                ->openUrlInNewTab() // Open the URL in a new tab
-                                ->color('primary'),
+                        Grid::make(2)->schema(array_filter([
+                            config('crown-cms.routes.category') ?
+                                // Clickable URL to the page
+                                TextEntry::make('url')
+                                    ->hiddenOn('create')
+                                    ->label('Bekijk categoriepagina')
+                                    ->state('Klik hier')
+                                    ->url(fn($record) => route(config('crown-cms.routes.category'), $record->slug)) // URL that will be opened
+                                    ->icon(Heroicon::Link)
+                                    ->color('primary')
+                                    ->openUrlInNewTab() // Open the URL in a new tab
+                                : null,
 
                             // Toggle for active status
                             Toggle::make('is_active')
-                                ->label('Pagina actief')
+                                ->label('Categoriepagina actief')
                                 ->inline(false)
                                 ->default(true),
-                        ]),
+                        ])),
 
                         // Created by and updated by with timestamps
                         Grid::make(2)->hiddenOn('create')->schema([

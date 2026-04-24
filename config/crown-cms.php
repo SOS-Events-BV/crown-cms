@@ -26,11 +26,28 @@ return [
     ],
 
     /**
-     * Specify the routing settings for the Page model.
+     * Specify the routing settings for the Page model. These will be used for the Page model.
      */
     'routing' => [
         'prefix' => '',
         'middleware' => ['web'],
+    ],
+
+    /**
+     * Specify the routes that should be used by the CrownCms plugin. Use the `name` of the route to link to it.
+     * If the route is null, the show button is not shown.
+     */
+    'routes' => [
+        // Need `slug` parameter
+        'page' => 'page', // Don't change this unless you know what you're doing. This is the default page route.
+        'category' => null, // The overview page for a category with associated products
+        'product' => null, // The detail page for a single product
+
+        // No `slug` parameter
+        'reviews' => null, // The page with all reviews
+        'faq' => null, // The page with all FAQ questions
+        'events' => null, // The overview page for all events
+        'products' => null, // The overview page for all products
     ],
 
     /**
