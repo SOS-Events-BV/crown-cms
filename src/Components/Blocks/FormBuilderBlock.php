@@ -20,7 +20,9 @@ class FormBuilderBlock extends Component
     )
     {
         $this->formInputs = $data->form_inputs;
-        $this->postRoute = route('page.submit', request()->route('slug') ?? '');
+
+        // - is only when previewing via Filament Peek
+        $this->postRoute = route('page.submit', isset(request()->slug) ? request()->slug : '-');
     }
 
     /**

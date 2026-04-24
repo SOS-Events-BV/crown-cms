@@ -11,6 +11,14 @@ return [
     'layout' => 'layout',
 
     /**
+     * Specify the views that should be used by the CrownCms plugin.
+     * Override these to use your own views with custom styling.
+     */
+    'views' => [
+        'page' => 'crown-cms::page.show',
+    ],
+
+    /**
      * Specify the models that should be used by the CrownCms plugin.
      */
     'models' => [
@@ -18,7 +26,7 @@ return [
     ],
 
     /**
-     * Specify the routing settings for the CrownCms plugin.
+     * Specify the routing settings for the Page model.
      */
     'routing' => [
         'prefix' => '',

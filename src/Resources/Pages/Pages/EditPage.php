@@ -12,6 +12,7 @@ use Pboivin\FilamentPeek\Pages\Concerns\HasPreviewModal;
 use SOSEventsBV\CrownCms\Enums\UserRole;
 use SOSEventsBV\CrownCms\Models\Page;
 use SOSEventsBV\CrownCms\Resources\Pages\PageResource;
+use Throwable;
 
 /**
  * @property Page $record
@@ -46,7 +47,7 @@ class EditPage extends EditRecord
      */
     protected function getPreviewModalView(): ?string
     {
-        return 'page';
+        return 'crown-cms::page.show'; // ← namespace toevoegen
     }
 
     /**
@@ -54,19 +55,44 @@ class EditPage extends EditRecord
      *
      * This changes the key in the preview to $page
      *
-     * @return string|null
+     * @param array $data
+     * @return array
      */
-    protected function getPreviewModalDataRecordKey(): ?string
+    protected function mutatePreviewModalData(array $data): array
     {
-        return 'page';
+        $data['page'] = $this->record->toArray();
+
+        return $data;
     }
+
+    /**
+     * Overwrite the preview modal view.
+     *
+     * TODO: This is a hack to make the preview work. We should find a better way to do this.
+     *
+     * @throws Throwable
+     */
+    public static function renderPreviewModalView(string $view, array $data): string
+    {
+        if (isset($data['page']) && is_array($data['page'])) {
+            $page = new Page();
+            $page->forceFill($data['page']);
+            $page->exists = true;
+            $data['page'] = $page;
+        }
+
+        $view = config('crown-cms.views.page', 'crown-cms::page.show');
+
+        return view($view, $data)->render();
+    }
+
 
     protected function getHeaderActions(): array
     {
         return [
             PreviewAction::make(), // This adds the preview button to the page
             DeleteAction::make()
-                ->authorize(fn ($record) => Auth::user()->getRole() === UserRole::Admin),
+                ->authorize(fn($record) => Auth::user()->getRole() === UserRole::Admin),
         ];
     }
 
