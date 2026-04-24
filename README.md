@@ -147,4 +147,5 @@ composer test
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+Copyright (c) 2026 SOS Events BV. All rights reserved. Please see the [License File](LICENSE) for more information.
+
