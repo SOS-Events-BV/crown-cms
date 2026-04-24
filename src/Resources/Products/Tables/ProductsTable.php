@@ -12,6 +12,8 @@ use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
+use SOSEventsBV\CrownCms\Enums\UserRole;
 
 class ProductsTable
 {
@@ -46,11 +48,13 @@ class ProductsTable
             ])
             ->recordActions([
                 EditAction::make(),
-                DeleteAction::make(),
+                DeleteAction::make()
+                    ->authorize(fn ($record) => Auth::user()->getRole() === UserRole::Admin),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()
+                        ->authorize(fn ($record) => Auth::user()->getRole() === UserRole::Admin),
                 ]),
             ]);
     }

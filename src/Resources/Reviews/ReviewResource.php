@@ -9,6 +9,8 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use SOSEventsBV\CrownCms\Enums\UserRole;
 use SOSEventsBV\CrownCms\Models\Review;
 use SOSEventsBV\CrownCms\Resources\Reviews\Pages\EditReview;
 use SOSEventsBV\CrownCms\Resources\Reviews\Pages\ListReviews;

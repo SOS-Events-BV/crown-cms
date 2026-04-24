@@ -20,7 +20,7 @@ class FormBuilderBlock extends Component
     )
     {
         $this->formInputs = $data->form_inputs;
-        $this->postRoute = route('page.submit', isset(request()->slug) ? request()->slug : ' ');
+        $this->postRoute = route('page.submit', request()->route('slug') ?? '');
     }
 
     /**

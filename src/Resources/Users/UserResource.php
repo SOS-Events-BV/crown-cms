@@ -7,6 +7,8 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Auth;
+use SOSEventsBV\CrownCms\Enums\UserRole;
 use SOSEventsBV\CrownCms\Resources\Users\Pages\CreateUser;
 use SOSEventsBV\CrownCms\Resources\Users\Pages\EditUser;
 use SOSEventsBV\CrownCms\Resources\Users\Pages\ListUsers;
@@ -57,5 +59,15 @@ class UserResource extends Resource
             'create' => CreateUser::route('/create'),
             'edit' => EditUser::route('/{record}/edit'),
         ];
+    }
+
+    /**
+     * Can only be accessed by admins.
+     *
+     * @return bool
+     */
+    public static function canAccess(): bool
+    {
+        return Auth::user()->getRole() === UserRole::Admin;
     }
 }

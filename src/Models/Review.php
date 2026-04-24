@@ -17,6 +17,7 @@ class Review extends Model
         'language',
         'review_placed',
         'extra_attributes',
+        'is_visible',
     ];
 
     protected $casts = [

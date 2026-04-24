@@ -19,6 +19,7 @@ trait HasCrownCmsFields
     protected function initializeHasCrownCmsFields(): void
     {
         $this->mergeFillable(['is_active', 'role']);
+        $this->mergeCasts(['role' => UserRole::class]);
     }
 
     /**

@@ -14,6 +14,8 @@ use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 use Filament\Tables\Filters\Filter;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
+use SOSEventsBV\CrownCms\Enums\UserRole;
 
 class PagesTable
 {
@@ -45,6 +47,7 @@ class PagesTable
 
                 // Add a DeleteAction with a custom modal heading and description
                 DeleteAction::make()
+                    ->authorize(fn ($record) => Auth::user()->getRole() === UserRole::Admin)
                     ->modalHeading('Pagina verwijderen')
                     ->modalDescription('Weet je zeker dat je deze pagina permanent wilt verwijderen? De slug van deze pagina wordt vrijgegeven. Als je bestaande links wilt opvangen, stel dan eerst een redirect in via het kopje Redirects.')
                     ->successNotification(Notification::make()
@@ -62,7 +65,8 @@ class PagesTable
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()
+                        ->authorize(fn ($record) => Auth::user()->getRole() === UserRole::Admin),
                 ]),
             ]);
     }

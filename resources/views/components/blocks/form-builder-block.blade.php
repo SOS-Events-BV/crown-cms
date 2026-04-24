@@ -23,7 +23,7 @@
                 @break
 
             @case('phone_input')
-                <crown-cms::form.input
+                <x-crown-cms::form.input
                     type="tel"
                     name="{{ Str::slug($input->data->label, '_') }}"
                     :label="$input->data->label"
@@ -33,7 +33,7 @@
                 @break
 
             @case('number_input')
-                <crown-cms::form.input
+                <x-crown-cms::form.input
                     type="number"
                     name="{{ Str::slug($input->data->label, '_') }}"
                     :label="$input->data->label"
@@ -54,7 +54,7 @@
                 @break
 
             @case('select')
-                <x-crown-cms::form.textarea
+                <x-crown-cms::form.select
                     name="{{ Str::slug($input->data->label, '_') }}"
                     :label="$input->data->label"
                     :options="$input->data->options"

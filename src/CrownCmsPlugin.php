@@ -26,6 +26,8 @@ class CrownCmsPlugin implements Plugin
     public function register(Panel $panel): void
     {
         $panel
+            ->profile()
+            ->passwordReset()
             ->plugins([
                 FilamentPeekPlugin::make(),
             ])

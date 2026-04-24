@@ -16,6 +16,8 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Auth;
+use SOSEventsBV\CrownCms\Enums\UserRole;
 use SOSEventsBV\CrownCms\Models\FaqPageQuestion;
 use SOSEventsBV\CrownCms\Resources\FaqPageQuestions\Pages\ManageFaqPageQuestions;
 
@@ -101,11 +103,13 @@ class FaqPageQuestionResource extends Resource
             ])
             ->recordActions([
                 EditAction::make(),
-                DeleteAction::make(),
+                DeleteAction::make()
+                    ->authorize(fn ($record) => Auth::user()->getRole() === UserRole::Admin),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()
+                        ->authorize(fn ($record) => Auth::user()->getRole() === UserRole::Admin),
                 ]),
             ]);
     }

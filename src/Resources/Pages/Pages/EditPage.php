@@ -6,8 +6,10 @@ use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Support\Facades\Auth;
 use Pboivin\FilamentPeek\Pages\Actions\PreviewAction;
 use Pboivin\FilamentPeek\Pages\Concerns\HasPreviewModal;
+use SOSEventsBV\CrownCms\Enums\UserRole;
 use SOSEventsBV\CrownCms\Models\Page;
 use SOSEventsBV\CrownCms\Resources\Pages\PageResource;
 
@@ -64,6 +66,7 @@ class EditPage extends EditRecord
         return [
             PreviewAction::make(), // This adds the preview button to the page
             DeleteAction::make()
+                ->authorize(fn ($record) => Auth::user()->getRole() === UserRole::Admin),
         ];
     }
 

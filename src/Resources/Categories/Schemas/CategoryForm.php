@@ -50,19 +50,9 @@ class CategoryForm
 
                         // Created by and updated by with timestamps
                         Grid::make(2)->hiddenOn('create')->schema([
-                            TextEntry::make('createdBy.name')
-                                ->label('Aangemaakt door')
-                                ->icon('heroicon-m-user')
-                                ->color('gray'),
-
                             TextEntry::make('created_at')
                                 ->label('Aangemaakt op')
                                 ->dateTime('d-m-Y H:i')
-                                ->color('gray'),
-
-                            TextEntry::make('updatedBy.name')
-                                ->label('Laatst gewijzigd door')
-                                ->icon('heroicon-m-pencil-square')
                                 ->color('gray'),
 
                             TextEntry::make('updated_at')

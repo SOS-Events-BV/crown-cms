@@ -3,12 +3,15 @@
 namespace SOSEventsBV\CrownCms\Resources\Reviews\Tables;
 
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Auth;
+use SOSEventsBV\CrownCms\Enums\UserRole;
 
 class ReviewsTable
 {
@@ -46,10 +49,13 @@ class ReviewsTable
             ])
             ->recordActions([
                 EditAction::make(),
+                DeleteAction::make()
+                    ->authorize(fn ($record) => Auth::user()->getRole() === UserRole::Admin),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()
+                        ->authorize(fn ($record) => Auth::user()->getRole() === UserRole::Admin),
                 ]),
             ]);
     }
