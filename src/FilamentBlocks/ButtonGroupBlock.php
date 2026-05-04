@@ -24,12 +24,7 @@ class ButtonGroupBlock
                         // 3 defaults are added in the template by default. If you have another button here, add this one to this file.
                         Select::make('class')
                             ->label('Knop type')
-                            ->options([
-                                // full CSS class name of button => name to show in Filament
-                                'btn btn-blue' => 'Blauw',
-                                'btn btn-pink' => 'Roze',
-                                'btn' => 'Grijs'
-                            ])->required(),
+                            ->options(config('crown-cms.buttons'))->required(),
 
                         TextInput::make('content')->label('Knop tekst')->required(),
 

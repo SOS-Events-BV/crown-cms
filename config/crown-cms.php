@@ -72,5 +72,15 @@ return [
             'api_key' => env('CROWNCMS_REVIEW_API_KEY'),
             'shop_id' => env('CROWNCMS_REVIEW_API_SHOP_ID'),
         ]
-    ]
+    ],
+
+    /**
+     * Add the classes for your buttons here, set it as the key. The value after is the name of the
+     * button that will be shown in the CMS.
+     */
+    'buttons' => [
+        'btn btn-blue' => 'Blauw',
+        'btn btn-pink' => 'Roze',
+        'btn'          => 'Grijs',
+    ],
 ];
