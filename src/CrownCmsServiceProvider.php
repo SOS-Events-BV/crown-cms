@@ -59,20 +59,6 @@ class CrownCmsServiceProvider extends PackageServiceProvider
 
     public function packageBooted(): void
     {
-        // Asset Registration
-        FilamentAsset::register(
-            $this->getAssets(),
-            $this->getAssetPackageName()
-        );
-
-        FilamentAsset::registerScriptData(
-            $this->getScriptData(),
-            $this->getAssetPackageName()
-        );
-
-        // Icon Registration
-        FilamentIcon::register($this->getIcons());
-
         // Register routes after all other service providers, so catch-all routes are last
         $this->app->booted(function () {
             $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
@@ -93,18 +79,6 @@ class CrownCmsServiceProvider extends PackageServiceProvider
     }
 
     /**
-     * @return array<Asset>
-     */
-    protected function getAssets(): array
-    {
-        return [
-            // AlpineComponent::make('crown-cms', __DIR__ . '/../resources/dist/components/crown-cms.js'),
-            // Css::make('crown-cms-styles', __DIR__ . '/../resources/dist/crown-cms.css'),
-            // Js::make('crown-cms-scripts', __DIR__ . '/../resources/dist/crown-cms.js'),
-        ];
-    }
-
-    /**
      * @return array<class-string>
      */
     protected function getCommands(): array
@@ -113,29 +87,5 @@ class CrownCmsServiceProvider extends PackageServiceProvider
             FetchCurrencies::class,
             FetchReviews::class
         ];
-    }
-
-    /**
-     * @return array<string>
-     */
-    protected function getIcons(): array
-    {
-        return [];
-    }
-
-    /**
-     * @return array<string>
-     */
-    protected function getRoutes(): array
-    {
-        return [];
-    }
-
-    /**
-     * @return array<string, mixed>
-     */
-    protected function getScriptData(): array
-    {
-        return [];
     }
 }

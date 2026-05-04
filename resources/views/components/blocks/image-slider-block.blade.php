@@ -17,6 +17,47 @@
     @endif
 </div>
 
-@push('scripts')
-    @vite('resources/js/swiper.js')
-@endpush
+@pushonce('scripts')
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll("[data-swiper]").forEach((el) => {
+                const data = JSON.parse(el.dataset.swiper);
+
+                new Swiper(el, {
+                    loop: data.loop,
+                    spaceBetween: data.spaceBetween,
+                    breakpoints: data.breakpoints,
+                    modules: [Swiper.Navigation, Swiper.Autoplay, Swiper.Pagination],
+
+                    navigation: data.navigation
+                        ? {
+                            nextEl: el.querySelector(".swiper-button-next"),
+                            prevEl: el.querySelector(".swiper-button-prev"),
+                        }
+                        : false,
+
+                    autoplay: data.autoplay
+                        ? {
+                            delay: data.autoplaySpeed,
+                            disableOnInteraction: false,
+                        }
+                        : false,
+
+                    pagination: data.pagination
+                        ? {
+                            el: el.querySelector(".swiper-pagination"),
+                            clickable: true,
+                        }
+                        : false,
+                });
+            });
+        });
+    </script>
+@endpushonce
