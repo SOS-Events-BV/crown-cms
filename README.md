@@ -67,9 +67,6 @@ CROWNCMS_LEISUREKING_API_PASSWORD=""
 CROWNCMS_LEISUREKING_API_ENVIRONMENT="test" # test or production
 CROWNCMS_LEISUREKING_API_SHOPHID=""
 
-# Weglot (is optional)
-CROWNCMS_WEGLOT_API_KEY=""
-
 # Reviews API
 CROWNCMS_REVIEW_API_URL="https://reageren.sosevents.nl/api"
 CROWNCMS_REVIEW_API_KEY=""
@@ -78,18 +75,6 @@ CROWNCMS_REVIEW_API_SHOP_ID=""
 # Recaptcha / No captcha keys (no CROWNCMS_ prefix, is from the nocaptcha package)
 NOCAPTCHA_SECRET=
 NOCAPTCHA_SITEKEY=
-
-# AI (optional) (from the laravel/ai package)
-ANTHROPIC_API_KEY=
-COHERE_API_KEY=
-ELEVENLABS_API_KEY=
-GEMINI_API_KEY=
-MISTRAL_API_KEY=
-OLLAMA_API_KEY=
-OPENAI_API_KEY=
-JINA_API_KEY=
-VOYAGEAI_API_KEY=
-XAI_API_KEY=
 ```
 
 ### Styling (optional)
@@ -106,6 +91,15 @@ The page view uses a `text-format` class for content formatting. Add the followi
 Make sure you have the `@tailwindcss/typography` plugin installed.
 
 _* This is not required, but this makes the page builder pages look a bit nicer._
+
+Also make sure that you add the following to your `app.css` file:
+
+```css
+@source '../../vendor/sos-events-bv/crown-cms/**/*.{blade.php,php}';
+```
+
+This will make sure that the CSS of the page builder blocks is included in the build.
+
 
 ## Requirements
 
@@ -147,5 +141,5 @@ composer test
 
 ## License
 
-Copyright (c) 2026 SOS Events BV. All rights reserved. Please see the [License File](LICENSE) for more information.
+Copyright © 2026 SOS Events BV. All rights reserved. Please see the [License File](LICENSE) for more information.
 
