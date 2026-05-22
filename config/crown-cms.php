@@ -63,10 +63,6 @@ return [
             'shophid' => env('CROWNCMS_LEISUREKING_API_SHOPHID'),
         ],
 
-        'weglot' => [
-            'api_key' => env('CROWNCMS_WEGLOT_API_KEY'),
-        ],
-
         'review' => [
             'url' => env('CROWNCMS_REVIEW_API_URL', 'https://reageren.sosevents.nl/api'),
             'api_key' => env('CROWNCMS_REVIEW_API_KEY'),
