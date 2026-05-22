@@ -42,7 +42,7 @@ public function panel(Panel $panel): Panel
 
 ### Redirecting
 
-The CMS has a redirect feature built in. If you want to have redirects, you must add the following to your withMiddleware function in the `bootstap/app.php` file:
+The CMS has a redirect feature built in. If you want to have redirects, you must add the following to your withMiddleware function in the `bootstrap/app.php` file:
 ```php
 use SOSEventsBV\CrownCms\Middleware\HandleRedirects;
 
@@ -126,7 +126,85 @@ You can change the layout component in the config:
 
 ## Usage
 
-coming soon... :)
+### Optional features
+
+By default the plugin registers all resources. You can disable individual features when registering the plugin:
+
+```php
+CrownCmsPlugin::make()
+    ->withoutReviews()
+    ->withoutFaq()
+    ->withoutEvents()
+    ->withoutProducts(), // also disables Categories
+```
+
+### Page builder
+
+Pages are built in the admin panel using a block-based editor. Each page's content is stored as a JSON array of typed blocks. On the front end, the page view loops over `$page->content_objects` and renders each block as a Blade component:
+
+```blade
+@foreach ($page->content_objects as $block)
+    <x-dynamic-component :component="'crown-cms::blocks.' . $block->type" :data="$block->data" />
+@endforeach
+```
+
+The entire loop is wrapped in a `<div class="text-format">`, so your `text-format` CSS class applies to all block output.
+
+### Using the page builder on your own models
+
+If you want to use the page builder on a model other than `Page` (e.g. `Product`), add the `HasContentBlocks` trait:
+
+```php
+use SOSEventsBV\CrownCms\Traits\HasContentBlocks;
+
+class Product extends Model
+{
+    use HasContentBlocks;
+
+    protected $casts = ['content' => 'array'];
+}
+```
+
+Then use `ContentBuilder::make('content')->blocks(ContentBuilder::blocks('product'))` in your Filament form schema, and render with `$product->content_objects` in your Blade view.
+
+If the content field is named differently, override `contentBlocksField()` in your model:
+
+```php
+protected function contentBlocksField(): string
+{
+    return 'description';
+}
+```
+
+### Form builder
+
+Pages with a `FormBuilderBlock` get a form at `/{slug}/submit`. On successful submission the visitor is redirected to `/{slug}/success`. The block stores the recipient email address and the success title/message — no additional configuration is needed.
+
+### Routes config
+
+The `routes` array in `config/crown-cms.php` maps resource types to named routes in your application. These are used to show a "View on site" button in the admin panel. Set a value to `null` to hide the button for that resource.
+
+```php
+'routes' => [
+    'page'     => 'page',      // route('page', $slug)
+    'category' => 'category',  // route('category', $slug)
+    'product'  => 'product',   // route('product', $slug)
+    'reviews'  => 'reviews',
+    'faq'      => 'faq',
+    'events'   => 'events',
+    'products' => 'products',
+],
+```
+
+### Overriding views
+
+Publish the config and point `views.page` to your own Blade view to customise the page layout:
+
+```php
+'views' => [
+    'page' => 'my-theme::page.show',
+],
+```
 
 ## Testing
 
