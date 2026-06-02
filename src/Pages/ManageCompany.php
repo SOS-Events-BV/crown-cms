@@ -59,7 +59,7 @@ class ManageCompany extends SettingsPage
 
                 TextInput::make('phone')
                     ->label('Telefoonnummer')
-                    ->tel()
+                    ->numeric()
                     ->required(),
             ]);
     }
