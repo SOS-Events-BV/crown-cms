@@ -42,11 +42,12 @@ class LeisureKingService
      *
      * @param string $endpoint Endpoint to request, without `https://www.api.leisureking.eu/public`, start with / and without version. `https://www.api.leisureking.eu/public/assortment/get/v4` becomes `/assortment/get`.
      * @param array $data The POST data to be added.
+     * @param string|null $version The version of the API to use. If not provided, the version from the config will be used.
      * @return array|int|string|null The response data. Returns null if no data is returned.
      * @throws ConnectionException
      * @throws RequestException
      */
-    public function request(string $endpoint, array $data = []): array|int|string|null
+    public function request(string $endpoint, array $data = [], ?string $version = null): array|int|string|null
     {
         // Create payload, with required data and given data
         $payload = array_merge($data, [
@@ -55,7 +56,7 @@ class LeisureKingService
         ]);
 
         // Create the URL, remove / from string
-        $url = trim($endpoint, '/') . '/' . $this->version;
+        $url = trim($endpoint, '/') . '/' . ($version ?? $this->version);
 
         try {
             return $this->client()
