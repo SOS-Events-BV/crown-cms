@@ -2,9 +2,11 @@
 
 namespace SOSEventsBV\CrownCms;
 
+use Filament\Actions\Action;
 use Filament\Contracts\Plugin;
 use Filament\Navigation\NavigationGroup;
 use Filament\Panel;
+use Filament\Support\Icons\Heroicon;
 use Pboivin\FilamentPeek\FilamentPeekPlugin;
 use SOSEventsBV\CrownCms\Pages\ManageCompany;
 use SOSEventsBV\CrownCms\Resources\Categories\CategoryResource;
@@ -82,6 +84,17 @@ class CrownCmsPlugin implements Plugin
                 NavigationGroup::make()->label('Pagina\'s'),
                 NavigationGroup::make()->label('Producten'),
                 NavigationGroup::make()->label('Instellingen'),
+            ])
+            ->spa() // Transitions between pages, smooth experience
+            ->unsavedChangesAlerts() // Alert when changes are made and you wan't to quit the page
+            ->sidebarCollapsibleOnDesktop() // Hide menu on desktop
+            ->userMenuItems([
+                // View website button
+                Action::make('viewSite')
+                    ->label('Bekijk website')
+                    ->url(config('app.url'))
+                    ->icon(Heroicon::GlobeAlt)
+                    ->openUrlInNewTab()
             ]);
     }
 
