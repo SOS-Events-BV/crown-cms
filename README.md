@@ -162,7 +162,8 @@ The entire loop is wrapped in a `<div class="text-format">`, so your `text-forma
 output.
 
 > **Do not use these components in your own views.** These blocks are specially made for the pagebuilder and
-> will not work in 'normal' blade views.
+> will not work in 'normal' blade views. Exception is the form fields: these are recommended to use in views, because
+> they have error handling built in.
 
 ### Using the page builder on your own models
 
