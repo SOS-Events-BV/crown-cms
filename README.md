@@ -1,6 +1,7 @@
 # CMS Panel plugin for websites of SOS Events BV.
 
-This package provides a CMS panel plugin for Filament for websites of SOS Events BV. This package contains a page builder, product resource, user management and more.
+This package provides a CMS panel plugin for Filament for websites of SOS Events BV. This package contains a page
+builder, product resource, user management and more.
 
 ## Installation
 
@@ -10,9 +11,11 @@ After adding the package to your project, you can install the plugin by running:
 php artisan crown-cms:install
 ```
 
-This will ask if you want to run the migrations. If you haven't run the migrations yet, make sure you select yes. If you have already run the migrations, please delete all tables and run the migrations again.
+This will ask if you want to run the migrations. If you haven't run the migrations yet, make sure you select yes. If you
+have already run the migrations, please delete all tables and run the migrations again.
 
-Because we make changes to the User model, we need to add the `HasCrownCmsFields` trait to the User model. This can be done by adding the following line to the `App\Models\User` model:
+Because we make changes to the User model, we need to add the `HasCrownCmsFields` trait to the User model. This can be
+done by adding the following line to the `App\Models\User` model:
 
 ```php
 class User extends Authenticatable implements FilamentUser
@@ -42,7 +45,9 @@ public function panel(Panel $panel): Panel
 
 ### Redirecting
 
-The CMS has a redirect feature built in. If you want to have redirects, you must add the following to your withMiddleware function in the `bootstrap/app.php` file:
+The CMS has a redirect feature built in. If you want to have redirects, you must add the following to your
+withMiddleware function in the `bootstrap/app.php` file:
+
 ```php
 use SOSEventsBV\CrownCms\Middleware\HandleRedirects;
 
@@ -56,7 +61,8 @@ return Application::configure(basePath: dirname(__DIR__))
 
 ### Environment variables
 
-We also have a few environment variables that are required for the plugin to work. You need to fill this in with your own values and keys. Please add these to your `.env` file and `.env.example` file (but without the values 😉).
+We also have a few environment variables that are required for the plugin to work. You need to fill this in with your
+own values and keys. Please add these to your `.env` file and `.env.example` file (but without the values 😉).
 
 ```dotenv
 # LeisureKing API
@@ -83,14 +89,18 @@ The page view uses a `text-format` class for content formatting. Add the followi
 
 ```css
 .text-format {
-    @apply prose lg:prose-lg prose-headings:mb-4 prose-headings:not-first:mt-5 
-    prose-headings:first:mt-0 max-w-none text-black;
+    @apply prose prose-headings:mb-4 prose-headings:not-first:mt-5
+    prose-h3:font-normal prose-h4:font-normal prose-h5:font-normal prose-h6:font-normal
+    [&>*:first-child]:mt-0 [&>*:first-child]:pt-0
+    [&>*:last-child]:mb-0 [&>*:last-child]:pb-0
+    max-w-none text-black;
 }
 ```
 
 Make sure you have the `@tailwindcss/typography` plugin installed.
 
-_* This is not required, but this makes the page builder pages look a bit nicer._
+_* This is not required, but this makes the page builder pages look a bit nicer. You can change things if you want
+different styling._
 
 Also make sure that you add the following to your `app.css` file:
 
@@ -99,7 +109,6 @@ Also make sure that you add the following to your `app.css` file:
 ```
 
 This will make sure that the CSS of the page builder blocks is included in the build.
-
 
 ## Requirements
 
@@ -140,7 +149,8 @@ CrownCmsPlugin::make()
 
 ### Page builder
 
-Pages are built in the admin panel using a block-based editor. Each page's content is stored as a JSON array of typed blocks. On the front end, the page view loops over `$page->content_objects` and renders each block as a Blade component:
+Pages are built in the admin panel using a block-based editor. Each page's content is stored as a JSON array of typed
+blocks. On the front end, the page view loops over `$page->content_objects` and renders each block as a Blade component:
 
 ```blade
 @foreach ($page->content_objects as $block)
@@ -148,7 +158,8 @@ Pages are built in the admin panel using a block-based editor. Each page's conte
 @endforeach
 ```
 
-The entire loop is wrapped in a `<div class="text-format">`, so your `text-format` CSS class applies to all block output.
+The entire loop is wrapped in a `<div class="text-format">`, so your `text-format` CSS class applies to all block
+output.
 
 ### Using the page builder on your own models
 
@@ -165,7 +176,8 @@ class Product extends Model
 }
 ```
 
-Then use `ContentBuilder::make('content')->blocks(ContentBuilder::blocks('product'))` in your Filament form schema, and render with `$product->content_objects` in your Blade view.
+Then use `ContentBuilder::make('content')->blocks(ContentBuilder::blocks('product'))` in your Filament form schema, and
+render with `$product->content_objects` in your Blade view.
 
 If the content field is named differently, override `contentBlocksField()` in your model:
 
@@ -178,11 +190,14 @@ protected function contentBlocksField(): string
 
 ### Form builder
 
-Pages with a `FormBuilderBlock` get a form at `/{slug}/submit`. On successful submission the visitor is redirected to `/{slug}/success`. The block stores the recipient email address and the success title/message — no additional configuration is needed.
+Pages with a `FormBuilderBlock` get a form at `/{slug}/submit`. On successful submission the visitor is redirected to
+`/{slug}/success`. The block stores the recipient email address and the success title/message — no additional
+configuration is needed.
 
 ### Routes config
 
-The `routes` array in `config/crown-cms.php` maps resource types to named routes in your application. These are used to show a "View on site" button in the admin panel. Set a value to `null` to hide the button for that resource.
+The `routes` array in `config/crown-cms.php` maps resource types to named routes in your application. These are used to
+show a "View on site" button in the admin panel. Set a value to `null` to hide the button for that resource.
 
 ```php
 'routes' => [
