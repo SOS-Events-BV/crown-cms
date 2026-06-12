@@ -68,6 +68,6 @@ class UserResource extends Resource
      */
     public static function canAccess(): bool
     {
-        return Auth::user()->getRole() === UserRole::Admin;
+        return Auth::user()->isAdmin();
     }
 }

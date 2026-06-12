@@ -14,12 +14,10 @@
 /art                    export-ignore
 /docs                   export-ignore
 /images                 export-ignore
-/tests                  export-ignore
 /package.json           export-ignore
 /phpstan-baseline.neon  export-ignore
 /phpstan.neon.dist      export-ignore
 /postcss.config.js      export-ignore
-/phpunit.xml.dist       export-ignore
 /pint.json              export-ignore
 /psalm.xml              export-ignore
 /psalm.xml.dist         export-ignore

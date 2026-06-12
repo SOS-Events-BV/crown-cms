@@ -5,9 +5,10 @@ namespace SOSEventsBV\CrownCms\Commands;
 
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-use Http;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client\ConnectionException;
 use SOSEventsBV\CrownCms\Models\Currency;
+use Illuminate\Support\Facades\Log;
 
 class FetchCurrencies extends Command
 {
@@ -65,7 +66,7 @@ class FetchCurrencies extends Command
                 ]);
             }
         } catch (\Exception $e) {
-            \Log::error("Error occurred during fetching currencies. " . $e->getMessage());
+            Log::error("Error occurred during fetching currencies. " . $e->getMessage());
         }
 
         $this->info('[END] Done fetching currency exchange rates [' . Carbon::now()->toDateTimeString() . ']');

@@ -6,13 +6,11 @@ use Filament\Support\Assets\Asset;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\View\Compilers\BladeCompiler;
-use Livewire\Features\SupportTesting\Testable;
 use SOSEventsBV\CrownCms\Commands\FetchCurrencies;
 use SOSEventsBV\CrownCms\Commands\FetchReviews;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use SOSEventsBV\CrownCms\Testing\TestsCrownCms;
 
 class CrownCmsServiceProvider extends PackageServiceProvider
 {
@@ -46,10 +44,6 @@ class CrownCmsServiceProvider extends PackageServiceProvider
             $package->hasConfigFile();
         }
 
-        if (file_exists($package->basePath('/../resources/lang'))) {
-            $package->hasTranslations();
-        }
-
         if (file_exists($package->basePath('/../resources/views'))) {
             $package->hasViews(static::$viewNamespace);
         }
@@ -68,9 +62,6 @@ class CrownCmsServiceProvider extends PackageServiceProvider
         $this->callAfterResolving(BladeCompiler::class, function (BladeCompiler $blade) {
             $blade->componentNamespace('SOSEventsBV\\CrownCms\\Components', 'crown-cms');
         });
-
-        // Testing
-        Testable::mixin(new TestsCrownCms);
     }
 
     protected function getAssetPackageName(): ?string

@@ -16,7 +16,7 @@ class EditReview extends EditRecord
     {
         return [
             DeleteAction::make()
-                ->authorize(fn ($record) => Auth::user()->getRole() === UserRole::Admin),
+                ->authorize(fn($record) => Auth::user()->isAdmin()),
         ];
     }
 }

@@ -5,15 +5,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-composer test          # Run the Pest test suite
 composer lint          # Auto-fix code style with PHP Pint
 composer test:lint     # Check code style without modifying files
-```
-
-Run a single test file or test:
-```bash
-./vendor/bin/pest tests/ExampleTest.php
-./vendor/bin/pest --filter "test name"
 ```
 
 ## What This Is
@@ -73,10 +66,6 @@ Key knobs:
 - `routing.prefix` / `routing.middleware` — applied to all CMS page routes.
 - `routes` — named route bindings for internal `show` links in the admin (set to `null` to hide the preview button for that resource).
 - `buttons` — CSS class → label map used by `ButtonGroupBlock`.
-
-## Testing
-
-Tests use **Pest** with the `orchestra/testbench` Workbench setup. `TestCase` bootstraps all required Filament service providers and runs migrations from `database/migrations/`. The database uses an in-memory SQLite connection (`database.default = testing`) with `LazilyRefreshDatabase`.
 
 ## Adding a New Block
 

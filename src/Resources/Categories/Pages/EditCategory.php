@@ -33,7 +33,7 @@ class EditCategory extends EditRecord
         return [
             PreviewAction::make(), // This adds the preview button to the page
             DeleteAction::make()
-                ->authorize(fn ($record) => Auth::user()->getRole() === UserRole::Admin),
+                ->authorize(fn($record) => Auth::user()->isAdmin()),
         ];
     }
 }

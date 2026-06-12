@@ -221,12 +221,6 @@ Publish the config and point `views.page` to your own Blade view to customise th
 ],
 ```
 
-## Testing
-
-```bash
-composer test
-```
-
 ## Credits
 
 - [Steven Roest](https://github.com/stevenemr)

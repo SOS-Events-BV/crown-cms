@@ -50,12 +50,12 @@ class ReviewsTable
             ->recordActions([
                 EditAction::make(),
                 DeleteAction::make()
-                    ->authorize(fn ($record) => Auth::user()->getRole() === UserRole::Admin),
+                    ->authorize(fn($record) => Auth::user()->isAdmin()),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make()
-                        ->authorize(fn ($record) => Auth::user()->getRole() === UserRole::Admin),
+                        ->authorize(fn($record) => Auth::user()->isAdmin()),
                 ]),
             ]);
     }

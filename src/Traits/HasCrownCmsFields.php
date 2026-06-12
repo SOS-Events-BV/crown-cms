@@ -43,6 +43,24 @@ trait HasCrownCmsFields
     }
 
     /**
+     * Returns if the user is an Admin.
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        return $this->getRole() === UserRole::Admin;
+    }
+
+    /**
+     * Returns if the user is an Editor.
+     * @return bool
+     */
+    public function isEditor(): bool
+    {
+        return $this->getRole() === UserRole::Editor;
+    }
+
+    /**
      * Checks if the user can access the CMS panel.
      *
      * @param Panel $panel

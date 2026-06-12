@@ -47,7 +47,7 @@ class PagesTable
 
                 // Add a DeleteAction with a custom modal heading and description
                 DeleteAction::make()
-                    ->authorize(fn ($record) => Auth::user()->getRole() === UserRole::Admin)
+                    ->authorize(fn($record) => Auth::user()->isAdmin())
                     ->modalHeading('Pagina verwijderen')
                     ->modalDescription('Weet je zeker dat je deze pagina permanent wilt verwijderen? De slug van deze pagina wordt vrijgegeven. Als je bestaande links wilt opvangen, stel dan eerst een redirect in via het kopje Redirects.')
                     ->successNotification(Notification::make()
@@ -66,7 +66,7 @@ class PagesTable
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make()
-                        ->authorize(fn ($record) => Auth::user()->getRole() === UserRole::Admin),
+                        ->authorize(fn($record) => Auth::user()->isAdmin()),
                 ]),
             ]);
     }
