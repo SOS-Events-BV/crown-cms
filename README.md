@@ -161,6 +161,9 @@ blocks. On the front end, the page view loops over `$page->content_objects` and 
 The entire loop is wrapped in a `<div class="text-format">`, so your `text-format` CSS class applies to all block
 output.
 
+> **Do not use these components in your own views.** These blocks are specially made for the pagebuilder and
+> will not work in 'normal' blade views.
+
 ### Using the page builder on your own models
 
 If you want to use the page builder on a model other than `Page` (e.g. `Product`), add the `HasContentBlocks` trait:

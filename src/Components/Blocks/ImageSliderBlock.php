@@ -39,7 +39,7 @@ class ImageSliderBlock extends Component
         $this->hasNavigation = $data->navigation ?? false;
         $this->hasPagination = $data->pagination ?? false;
 
-        $this->images = $data->images;
+        $this->images = $data->images ?? [];
     }
 
     /**
