@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use InvalidArgumentException;
 
 class LeisureKingService
 {
@@ -100,5 +101,44 @@ class LeisureKingService
                 throw $e;
             }
         });
+    }
+
+    /**
+     * Set the version of the LesiureKingService.
+     *
+     * @param string $version
+     * @return void
+     */
+    public function setVersion(string $version)
+    {
+        $this->version = $version;
+    }
+
+    /**
+     * Set the environment (test or production) of the LeisureKingService
+     *
+     * @param string $environment
+     * @return void
+     */
+    public function setEnvironment(string $environment)
+    {
+        if (!in_array($environment, ['test', 'production'])) {
+            throw new InvalidArgumentException(
+                sprintf('Invalid environment "%s", expected "test" or "production".', $environment)
+            );
+        }
+
+        $this->environment = $environment;
+    }
+
+    /**
+     * Set the shophid of the LeisureKingService
+     *
+     * @param string $shopHid
+     * @return void
+     */
+    public function setShopHid(string $shopHid)
+    {
+        $this->shophid = $shopHid;
     }
 }
