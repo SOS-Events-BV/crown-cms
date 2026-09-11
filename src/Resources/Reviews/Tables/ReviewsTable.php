@@ -21,7 +21,7 @@ class ReviewsTable
             ->columns([
                 TextColumn::make('full_name')
                     ->label('Volledige naam')
-                    ->searchable(),
+                    ->searchable(['firstname', 'lastname']),
 
                 TextColumn::make('stars')
                     ->label('Aantal sterren')
