@@ -6,6 +6,7 @@ use Filament\Support\Assets\Asset;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\View\Compilers\BladeCompiler;
+use SOSEventsBV\CrownCms\Commands\CreateCustomBlock;
 use SOSEventsBV\CrownCms\Commands\FetchCurrencies;
 use SOSEventsBV\CrownCms\Commands\FetchReviews;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
@@ -49,13 +50,17 @@ class CrownCmsServiceProvider extends PackageServiceProvider
         }
     }
 
-    public function packageRegistered(): void {}
+    public function packageRegistered(): void {
+        //
+    }
 
     public function packageBooted(): void
     {
         // Register routes after all other service providers, so catch-all routes are last
         $this->app->booted(function () {
-            $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+            if (config('crown-cms.routing.register_catch_all', true)) {
+                $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+            }
         });
 
         // Add components to the website of the user
@@ -76,7 +81,8 @@ class CrownCmsServiceProvider extends PackageServiceProvider
     {
         return [
             FetchCurrencies::class,
-            FetchReviews::class
+            FetchReviews::class,
+            CreateCustomBlock::class,
         ];
     }
 }
