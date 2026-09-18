@@ -2,6 +2,8 @@
 
 namespace SOSEventsBV\CrownCms\FilamentComponents;
 
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 use SOSEventsBV\CrownCms\FilamentBlocks\ButtonGroupBlock;
 use SOSEventsBV\CrownCms\FilamentBlocks\ContentBlock;
 use SOSEventsBV\CrownCms\FilamentBlocks\CustomHtmlBlock;
@@ -27,7 +29,7 @@ class ContentBuilder
      */
     public static function blocks(string $directory = 'page'): array
     {
-        return [
+        $core = [
             HeadingBlock::make(),
             ContentBlock::make(),
             ImageBlock::make($directory),
@@ -42,6 +44,8 @@ class ContentBuilder
             ReadMoreBlock::make(),
             CustomHtmlBlock::make(),
         ];
+
+        return array_merge($core, static::discoverCustomBlocks($directory));
     }
 
     /**
@@ -52,7 +56,7 @@ class ContentBuilder
      */
     public static function columnBlocks(string $directory = 'page'): array
     {
-        return [
+        $core = [
             HeadingBlock::make(),
             ContentBlock::make(),
             ImageBlock::make($directory),
@@ -65,6 +69,41 @@ class ContentBuilder
             ReadMoreBlock::make(),
             CustomHtmlBlock::make(),
         ];
+
+        return array_merge($core, static::discoverCustomBlocks($directory));
+    }
+
+    /**
+     * Get custom blocks from the app/CrownCms/CustomBlocks directory.
+     *
+     * @param string $directory
+     * @return array
+     */
+    protected static function discoverCustomBlocks(string $directory): array
+    {
+        $path = app_path('CrownCms/CustomBlocks');
+
+        if (!is_dir($path)) {
+            return [];
+        }
+
+        $blocks = [];
+
+        foreach (File::allFiles($path) as $file) {
+            $relative = Str::of($file->getRelativePathname())
+                ->replace('.php', '')
+                ->replace('/', '\\');
+
+            $class = 'App\\CrownCms\\CustomBlocks\\' . $relative;
+
+            if(! class_exists($class) || ! method_exists($class, 'make')) {
+                continue; // No block, skip
+            }
+
+            $blocks[] = $class::make($directory);
+        }
+
+        return $blocks;
     }
 
     /**

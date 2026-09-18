@@ -1,0 +1,19 @@
+<?php
+
+namespace {{ namespace }};
+
+use Filament\Forms\Components\Builder\Block;
+use Filament\Support\Icons\Heroicon;
+
+class {{ class }}
+{
+    public static function make(): Block
+    {
+        return Block::make('{{ blockKey }}')
+            ->label('{{ label }}')
+            ->icon(Heroicon::Square3Stack3d)
+            ->schema([
+                //
+            ]);
+    }
+}
