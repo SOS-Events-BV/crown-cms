@@ -198,6 +198,39 @@ Pages with a `FormBuilderBlock` get a form at `/{slug}/submit`. On successful su
 `/{slug}/success`. The block stores the recipient email address and the success title/message — no additional
 configuration is needed.
 
+### Adding your own catch-all routes
+
+The package registers its own catch-all routes (`/{slug}`, `/{slug}/submit`, `/{slug}/success`) as the very last
+routes in the application, so any specific route you define in your own app already takes priority over them.
+
+If you also want your own catch-all route (e.g. to resolve slugs against your own models before falling back to
+CMS pages), disable the package's catch-all routes in `config/crown-cms.php`:
+
+```php
+'routing' => [
+    // ...
+    'register_catch_all' => false,
+],
+```
+
+Then define your own catch-all route, and call `PageController` yourself as the final fallback:
+
+```php
+use SOSEventsBV\CrownCms\Http\Controllers\PageController;
+
+Route::get('/{slug}', function (string $slug) {
+    if ($event = Event::where('slug', $slug)->first()) {
+        return view('events.show', ['event' => $event]);
+    }
+
+    // Nothing of our own matched, let the CMS try to find a page
+    return app(PageController::class)->show($slug);
+})->where('slug', '.+');
+```
+
+`PageController::show()`, `submitForm()` and `showSuccess()` are plain, stateless methods, so you can call them
+directly like this regardless of `register_catch_all`.
+
 ### Routes config
 
 The `routes` array in `config/crown-cms.php` maps resource types to named routes in your application. These are used to

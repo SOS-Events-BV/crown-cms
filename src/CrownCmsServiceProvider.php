@@ -49,13 +49,17 @@ class CrownCmsServiceProvider extends PackageServiceProvider
         }
     }
 
-    public function packageRegistered(): void {}
+    public function packageRegistered(): void {
+        //
+    }
 
     public function packageBooted(): void
     {
         // Register routes after all other service providers, so catch-all routes are last
         $this->app->booted(function () {
-            $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+            if (config('crown-cms.routing.register_catch_all', true)) {
+                $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+            }
         });
 
         // Add components to the website of the user

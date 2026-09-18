@@ -31,6 +31,13 @@ return [
     'routing' => [
         'prefix' => '',
         'middleware' => ['web'],
+
+        /**
+         * Whether the package should register its own catch-all routes (`/{slug}`, `/{slug}/submit`,
+         * `/{slug}/success`). Set this to `false` if you want to define your own catch-all route in the
+         * host app and call `PageController` yourself as a fallback. See the README for more info.
+         */
+        'register_catch_all' => true,
     ],
 
     /**
