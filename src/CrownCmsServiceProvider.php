@@ -6,6 +6,7 @@ use Filament\Support\Assets\Asset;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\View\Compilers\BladeCompiler;
+use SOSEventsBV\CrownCms\Commands\CreateCustomBlock;
 use SOSEventsBV\CrownCms\Commands\FetchCurrencies;
 use SOSEventsBV\CrownCms\Commands\FetchReviews;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
@@ -76,7 +77,8 @@ class CrownCmsServiceProvider extends PackageServiceProvider
     {
         return [
             FetchCurrencies::class,
-            FetchReviews::class
+            FetchReviews::class,
+            CreateCustomBlock::class,
         ];
     }
 }

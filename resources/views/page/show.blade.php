@@ -10,7 +10,11 @@
     <div class="container py-10">
         <div class="text-format">
             @foreach ($page->content_objects as $block)
-                <x-dynamic-component :component="'crown-cms::blocks.' . $block->type" :data="$block->data"/>
+                @if(view()->exists("crown-cms::components.blocks.{$block->type}"))
+                    <x-dynamic-component :component="'crown-cms::blocks.' . $block->type" :data="$block->data"/>
+                @elseif(view()->exists("components.crown-cms.custom-blocks.{$block->type}"))
+                    <x-dynamic-component :component="'crown-cms.custom-blocks.' . $block->type" :data="$block->data"/>
+                @endif
             @endforeach
         </div>
     </div>
