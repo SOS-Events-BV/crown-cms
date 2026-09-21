@@ -36,16 +36,16 @@ class CreateCustomBlock extends Command
         $label = $this->ask('What should the label be of the component?');
 
         $className = Str::endsWith($blockName, 'Block') ? $blockName : $blockName . 'Block';
-        $viewName = 'components.crown-cms.custom-blocks.' . Str::snake($className);
+        $viewName = 'components.crown-cms.custom-blocks.' . Str::kebab($className);
 
         $customBlocksDirectory = app_path('CrownCms/CustomBlocks');
         $customBlockFilePath = $customBlocksDirectory . '/' . $className . '.php';
 
-        $componentDirectory = app_path('View/Components/CrownCms');
+        $componentDirectory = app_path('View/Components/CrownCms/CustomBlocks');
         $componentFilePath = $componentDirectory . '/' . $className . '.php';
 
         $viewDirectory = resource_path('views/components/crown-cms/custom-blocks');
-        $viewFilePath = $viewDirectory . '/' . Str::snake($className) . '.blade.php';
+        $viewFilePath = $viewDirectory . '/' . Str::kebab($className) . '.blade.php';
 
         // Check if any of the files already exist
         if (File::exists($customBlockFilePath) || File::exists($componentFilePath) || File::exists($viewFilePath)) {
@@ -105,7 +105,7 @@ class CreateCustomBlock extends Command
         $stub = File::get($stubPath);
 
         $replacements = [
-            '{{ namespace }}' => 'App\View\Components\CrownCms',
+            '{{ namespace }}' => 'App\View\Components\CrownCms\CustomBlocks',
             '{{ class }}' => $className,
             '{{ view }}' => $viewName,
         ];

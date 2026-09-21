@@ -9,7 +9,12 @@
                 @if($textStyle) style="{{ $textStyle }}" @endif
             >
                 @forelse ($leftColumn as $block)
-                    <x-dynamic-component :component="'crown-cms::blocks.' . $block->type" :data="$block->data"/>
+                    @php($blockView = str_replace('_', '-', $block->type))
+                    @if(view()->exists("crown-cms::components.blocks.{$blockView}"))
+                        <x-dynamic-component :component="'crown-cms::blocks.' . $block->type" :data="$block->data"/>
+                    @elseif(view()->exists("components.crown-cms.custom-blocks.{$blockView}"))
+                        <x-dynamic-component :component="'crown-cms.custom-blocks.' . $block->type" :data="$block->data"/>
+                    @endif
                 @empty
                     {{-- Empty column --}}
                 @endforelse
@@ -20,7 +25,12 @@
                 @if($textStyle) style="{{ $textStyle }}" @endif
             >
                 @forelse ($rightColumn as $block)
-                    <x-dynamic-component :component="'crown-cms::blocks.' . $block->type" :data="$block->data"/>
+                    @php($blockView = str_replace('_', '-', $block->type))
+                    @if(view()->exists("crown-cms::components.blocks.{$blockView}"))
+                        <x-dynamic-component :component="'crown-cms::blocks.' . $block->type" :data="$block->data"/>
+                    @elseif(view()->exists("components.crown-cms.custom-blocks.{$blockView}"))
+                        <x-dynamic-component :component="'crown-cms.custom-blocks.' . $block->type" :data="$block->data"/>
+                    @endif
                 @empty
                     {{-- Empty column --}}
                 @endforelse
