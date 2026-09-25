@@ -27,13 +27,13 @@ class CategoriesTable
 
                 TextColumn::make('slug')
                     ->label('Pagina')
-                    ->url(fn($record) => config('crown-cms.routes.category') ?
+                    ->url(fn($record) => config('crown-cms.routes.category') && $record->is_active ?
                         route(config('crown-cms.routes.category'), $record->slug) :
                         null
                     ) // URL that will be opened
-                    ->icon(config('crown-cms.routes.category') ? Heroicon::Link : null)
-                    ->color(config('crown-cms.routes.category') ? 'primary' : null)
-                    ->openUrlInNewTab(), // Open the URL in a new tab,
+                    ->icon(Heroicon::Link)
+                    ->color(fn ($record) => config('crown-cms.routes.category') && $record->is_active ? 'primary' : 'gray')
+                    ->openUrlInNewTab(),
 
                 ToggleColumn::make('is_active')
                     ->label('Actief')

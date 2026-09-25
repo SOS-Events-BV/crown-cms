@@ -27,9 +27,9 @@ class PagesTable
 
                 TextColumn::make('slug')
                     ->label('Pagina')
-                    ->url(fn($record) => config('crown-cms.routes.page') ? route(config('crown-cms.routes.page'), $record->slug) : null)
+                    ->url(fn($record) => config('crown-cms.routes.page') && $record->is_active ? route(config('crown-cms.routes.page'), $record->slug) : null)
                     ->icon(config('crown-cms.routes.page') ? Heroicon::Link : null)
-                    ->color(config('crown-cms.routes.page') ? 'primary' : null)
+                    ->color(fn($record) => config('crown-cms.routes.page') && $record->is_active ? 'primary' : 'gray')
                     ->openUrlInNewTab(),
 
                 ToggleColumn::make('is_active')->label('Actief'),

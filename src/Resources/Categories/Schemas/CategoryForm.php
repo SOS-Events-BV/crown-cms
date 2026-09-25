@@ -12,6 +12,7 @@ use Filament\Forms\Components\Toggle;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Illuminate\Support\Str;
@@ -30,25 +31,23 @@ class CategoryForm
                     ->schema([
                         SeoSettings::make('category/og'),
 
-                        Grid::make(2)->schema(array_filter([
-                            config('crown-cms.routes.category') ?
-                                // Clickable URL to the page
-                                TextEntry::make('url')
-                                    ->hiddenOn('create')
-                                    ->label('Bekijk categoriepagina')
-                                    ->state('Klik hier')
-                                    ->url(fn($record) => route(config('crown-cms.routes.category'), $record->slug)) // URL that will be opened
-                                    ->icon(Heroicon::Link)
-                                    ->color('primary')
-                                    ->openUrlInNewTab() // Open the URL in a new tab
-                                : null,
+                        Grid::make(2)->schema([
+                            TextEntry::make('url')
+                                ->hiddenOn('create')
+                                ->label('Bekijk categoriepagina')
+                                ->state('Klik hier')
+                                ->url(fn (Get $get, $record) => $get('is_active') && config('crown-cms.routes.category') ? route(config('crown-cms.routes.category'), $record->slug) : null)
+                                ->icon(Heroicon::Link)
+                                ->color(fn (Get $get) => $get('is_active') ? 'primary' : 'gray')
+                                ->openUrlInNewTab(),
 
                             // Toggle for active status
                             Toggle::make('is_active')
-                                ->label('Categoriepagina actief')
+                                ->label('Pagina actief')
                                 ->inline(false)
-                                ->default(true),
-                        ])),
+                                ->default(true)
+                                ->live(),
+                        ]),
 
                         // Created by and updated by with timestamps
                         Grid::make(2)->hiddenOn('create')->schema([
