@@ -23,8 +23,8 @@ class LeisurekingFrame extends Component
         $this->url = url()->query("https://booking.leisureking.eu/bm/$this->bookingmodule_code", [
             'no-scroll' => $data->no_scroll,
             'date' => $data->date,
-            'min_date' => $data->min_date,
-            'max_date' => $data->max_date,
+            'min-date' => $data->min_date,
+            'max-date' => $data->max_date,
             'lang' => $data->lang
         ]);
     }
