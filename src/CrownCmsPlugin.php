@@ -2,6 +2,8 @@
 
 namespace SOSEventsBV\CrownCms;
 
+use Cocosmos\FilamentStickySaveBar\Enums\ShowOn;
+use Cocosmos\FilamentStickySaveBar\StickySaveBarPlugin;
 use Filament\Actions\Action;
 use Filament\Contracts\Plugin;
 use Filament\Navigation\NavigationGroup;
@@ -95,6 +97,10 @@ class CrownCmsPlugin implements Plugin
                     ->url(config('app.url'))
                     ->icon(Heroicon::GlobeAlt)
                     ->openUrlInNewTab()
+            ])
+            ->plugins([
+                StickySaveBarPlugin::make()
+                    ->showOn(ShowOn::Dirty),
             ]);
     }
 

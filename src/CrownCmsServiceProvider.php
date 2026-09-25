@@ -50,12 +50,18 @@ class CrownCmsServiceProvider extends PackageServiceProvider
         }
     }
 
-    public function packageRegistered(): void {
+    public function packageRegistered(): void
+    {
         //
     }
 
     public function packageBooted(): void
     {
+        // Load translation overrides for other packages from lang/vendor/{namespace}
+        $this->callAfterResolving('translation.loader', function ($loader) {
+            $loader->addPath(__DIR__ . '/../lang');
+        });
+
         // Register routes after all other service providers, so catch-all routes are last
         $this->app->booted(function () {
             if (config('crown-cms.routing.register_catch_all', true)) {
