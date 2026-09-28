@@ -10,6 +10,7 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
+use SOSEventsBV\CrownCms\CrownCmsPlugin;
 use SOSEventsBV\CrownCms\FilamentComponents\SeoSettings;
 use SOSEventsBV\CrownCms\FilamentComponents\ContentBuilder;
 
@@ -74,6 +75,12 @@ class PageForm
 
                 // Page Builder
                 ContentBuilder::make('content'),
+
+                Section::make('Extra velden')
+                    ->columns(2)
+                    ->schema(CrownCmsPlugin::get()->getAdditionalPageInputs())
+                    ->columnSpanFull()
+                    ->hidden(empty(CrownCmsPlugin::get()->getAdditionalPageInputs())),
             ]);
     }
 }

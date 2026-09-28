@@ -10,13 +10,10 @@ class Page extends Model
 {
     use HasSeo, HasContentBlocks;
 
-    protected $fillable = [
-        // Content
-        'slug',
-        'content',
-
-        // Settings
-        'is_active',
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at',
     ];
 
     protected $casts = [

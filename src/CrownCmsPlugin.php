@@ -27,6 +27,8 @@ class CrownCmsPlugin implements Plugin
     protected bool $withEvents = true;
     protected bool $withProducts = true;
 
+    protected array $additionalPageInputs = [];
+
     public function withoutReviews(): self
     {
         $this->withReviews = false;
@@ -49,6 +51,17 @@ class CrownCmsPlugin implements Plugin
     {
         $this->withProducts = false;
         return $this;
+    }
+
+    public function additionalPageInputs(array $inputs): self
+    {
+        $this->additionalPageInputs = $inputs;
+        return $this;
+    }
+
+    public function getAdditionalPageInputs(): array
+    {
+        return $this->additionalPageInputs;
     }
 
     public function getId(): string
