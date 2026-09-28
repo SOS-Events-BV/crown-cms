@@ -12,6 +12,8 @@ class {{ class }} extends Component
     public function __construct(
         public stdClass $data
     ) {
+        // Add your own values here, as Laravel will exclude `$data` in the view.
+        // $this->example = $data->example ?? ''; 
     }
 
     public function render(): View|Closure|string
