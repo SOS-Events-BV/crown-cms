@@ -147,6 +147,34 @@ CrownCmsPlugin::make()
     ->withoutProducts(), // also disables Categories
 ```
 
+### Additional page fields
+
+You can add your own fields to the page form with `additionalPageInputs()`. They are shown in an "Extra velden" section
+below the page builder (the section is hidden when no fields are given):
+
+```php
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
+
+CrownCmsPlugin::make()
+    ->additionalPageInputs([
+        TextInput::make('subtitle'),
+        Toggle::make('show_in_footer'),
+    ]),
+```
+
+The package does not create database columns for these fields, so add them to the `pages` table yourself with a
+migration in your app:
+
+```php
+Schema::table('pages', function (Blueprint $table) {
+    $table->string('subtitle')->nullable();
+    $table->boolean('show_in_footer')->default(false);
+});
+```
+
+The `Page` model only guards `id` and the timestamps, so the new columns are mass assignable without further changes.
+
 ### Page builder
 
 Pages are built in the admin panel using a block-based editor. Each page's content is stored as a JSON array of typed
