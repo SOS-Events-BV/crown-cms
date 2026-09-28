@@ -20,7 +20,7 @@ class ImageBlock extends Component
         public stdClass $data
     )
     {
-        $this->url = asset(Storage::url($data->url));
+        $this->url = Storage::disk('public')->url($data->url);
         $this->alt = $data->alt;
     }
 
