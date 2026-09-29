@@ -23,16 +23,20 @@ class PagesTable
     {
         return $table
             ->columns([
-                TextColumn::make('seo.page_title')->label('Titel'),
+                TextColumn::make('seo.page_title')
+                    ->label('Titel')
+                    ->searchable(),
 
                 TextColumn::make('slug')
                     ->label('Pagina')
+                    ->searchable()
                     ->url(fn($record) => config('crown-cms.routes.page') && $record->is_active ? route(config('crown-cms.routes.page'), $record->slug) : null)
                     ->icon(config('crown-cms.routes.page') ? Heroicon::Link : null)
                     ->color(fn($record) => config('crown-cms.routes.page') && $record->is_active ? 'primary' : 'gray')
                     ->openUrlInNewTab(),
 
-                ToggleColumn::make('is_active')->label('Actief'),
+                ToggleColumn::make('is_active')
+                    ->label('Actief'),
 
                 TextColumn::make('created_at')->dateTime()->label('Aangemaakt op')->sortable(),
             ])
