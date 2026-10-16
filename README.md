@@ -182,7 +182,16 @@ blocks. On the front end, the page view loops over `$page->content_objects` and 
 
 ```blade
 @foreach ($page->content_objects as $block)
-    <x-dynamic-component :component="'crown-cms::blocks.' . $block->type" :data="$block->data" />
+    {{-- Temp fix for block names, will be fixed in new version --}}
+    @php($blockView = str_replace('_', '-', $block->type))
+    
+    {{-- Package Components --}}
+    @if(view()->exists("crown-cms::components.blocks.{$blockView}"))
+        <x-dynamic-component :component="'crown-cms::blocks.' . $block->type" :data="$block->data"/>
+    {{-- Own components --}}
+    @elseif(view()->exists("components.crown-cms.custom-blocks.{$blockView}"))
+        <x-dynamic-component :component="'crown-cms.custom-blocks.' . $block->type" :data="$block->data"/>
+    @endif
 @endforeach
 ```
 
