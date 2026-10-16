@@ -16,15 +16,16 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Illuminate\Support\Facades\Auth;
-use SOSEventsBV\CrownCms\Enums\UserRole;
 use SOSEventsBV\CrownCms\Models\Redirect;
 use SOSEventsBV\CrownCms\Resources\Redirects\Pages\ManageRedirects;
+use SOSEventsBV\CrownCms\Traits\HasCrownCmsPermissions;
 use UnitEnum;
 
 
 class RedirectResource extends Resource
 {
+    use HasCrownCmsPermissions;
+
     protected static ?string $model = Redirect::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::ArrowsRightLeft;
@@ -119,15 +120,5 @@ class RedirectResource extends Resource
         return [
             'index' => ManageRedirects::route('/'),
         ];
-    }
-
-    /**
-     * Can only be accessed by admins.
-     *
-     * @return bool
-     */
-    public static function canAccess(): bool
-    {
-        return Auth::user()->isAdmin();
     }
 }

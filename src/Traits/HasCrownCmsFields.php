@@ -3,11 +3,9 @@
 namespace SOSEventsBV\CrownCms\Traits;
 
 use Filament\Panel;
-use SOSEventsBV\CrownCms\Enums\UserRole;
 
 /**
  * @property bool $is_active
- * @property UserRole $role
  */
 trait HasCrownCmsFields
 {
@@ -19,7 +17,6 @@ trait HasCrownCmsFields
     protected function initializeHasCrownCmsFields(): void
     {
         $this->mergeFillable(['is_active', 'role']);
-        $this->mergeCasts(['role' => UserRole::class]);
     }
 
     /**
@@ -35,29 +32,60 @@ trait HasCrownCmsFields
     /**
      * Get the user's role.
      *
-     * @return UserRole
+     * @return string
      */
-    public function getRole(): UserRole
+    public function getRole(): string
     {
         return $this->role;
     }
 
+    public function getRoleConfig(): array
+    {
+        return config('crown-cms.roles.' . $this->role);
+    }
+
+    /**
+     * Returns if the user is a super admin.
+     * @return bool
+     */
+    public function isSuperAdmin(): bool
+    {
+        return $this->getRole() == 'admin' || ($this->getRoleConfig()['super_admin'] ?? false);
+    }
+
     /**
      * Returns if the user is an Admin.
+     * @deprecated since 1.2, will be removed in 2.0. Please use $user->isSuperAdmin() instead.
      * @return bool
      */
     public function isAdmin(): bool
     {
-        return $this->getRole() === UserRole::Admin;
+        return $this->isSuperAdmin();
     }
 
     /**
      * Returns if the user is an Editor.
+     * @deprecated since 1.2, will be removed in 2.0. Please use $user->getRole() or $user->hasPermission() instead.
      * @return bool
      */
     public function isEditor(): bool
     {
-        return $this->getRole() === UserRole::Editor;
+        return $this->getRole() == 'editor';
+    }
+
+    /**
+     * Returns if the user has permission to perform an action on a class.
+     * @param string $class
+     * @param string $action
+     * @return bool
+     */
+    public function hasPermission(string $class, string $action): bool
+    {
+        if (empty($this->role)) return false;
+
+        if ($this->getRoleConfig()['super_admin'] ?? false) return true;
+
+        return in_array($action, $this->getRoleConfig()['permissions'][$class] ?? []);
     }
 
     /**

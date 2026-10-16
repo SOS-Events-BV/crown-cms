@@ -12,9 +12,12 @@ use SOSEventsBV\CrownCms\Resources\Products\Pages\EditProduct;
 use SOSEventsBV\CrownCms\Resources\Products\Pages\ListProducts;
 use SOSEventsBV\CrownCms\Resources\Products\Schemas\ProductForm;
 use SOSEventsBV\CrownCms\Resources\Products\Tables\ProductsTable;
+use SOSEventsBV\CrownCms\Traits\HasCrownCmsPermissions;
 
 class ProductResource extends Resource
 {
+    use HasCrownCmsPermissions;
+
     protected static ?string $model = Product::class;
     protected static string|null|\BackedEnum $navigationIcon = Heroicon::OutlinedShoppingBag;
     protected static ?string $recordTitleAttribute = 'name';

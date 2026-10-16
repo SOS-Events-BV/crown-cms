@@ -13,9 +13,12 @@ use SOSEventsBV\CrownCms\Resources\Categories\Pages\EditCategory;
 use SOSEventsBV\CrownCms\Resources\Categories\Pages\ListCategories;
 use SOSEventsBV\CrownCms\Resources\Categories\Schemas\CategoryForm;
 use SOSEventsBV\CrownCms\Resources\Categories\Tables\CategoriesTable;
+use SOSEventsBV\CrownCms\Traits\HasCrownCmsPermissions;
 
 class CategoryResource extends Resource
 {
+    use HasCrownCmsPermissions;
+
     protected static ?string $model = Category::class;
     protected static string | BackedEnum | null $navigationIcon = Heroicon::OutlinedTag;
     protected static ?string $recordTitleAttribute = 'name';

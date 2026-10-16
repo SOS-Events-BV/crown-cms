@@ -16,13 +16,14 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Illuminate\Support\Facades\Auth;
-use SOSEventsBV\CrownCms\Enums\UserRole;
 use SOSEventsBV\CrownCms\Models\FaqPageQuestion;
 use SOSEventsBV\CrownCms\Resources\FaqPageQuestions\Pages\ManageFaqPageQuestions;
+use SOSEventsBV\CrownCms\Traits\HasCrownCmsPermissions;
 
 class FaqPageQuestionResource extends Resource
 {
+    use HasCrownCmsPermissions;
+
     protected static ?string $model = FaqPageQuestion::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedQuestionMarkCircle;
@@ -104,12 +105,10 @@ class FaqPageQuestionResource extends Resource
             ->recordActions([
                 EditAction::make(),
                 DeleteAction::make()
-                    ->authorize(fn($record) => Auth::user()->isAdmin()),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make()
-                        ->authorize(fn($record) => Auth::user()->isAdmin()),
                 ]),
             ]);
     }

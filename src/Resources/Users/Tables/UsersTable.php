@@ -12,7 +12,6 @@ use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Auth;
-use SOSEventsBV\CrownCms\Enums\UserRole;
 
 class UsersTable
 {
@@ -55,7 +54,7 @@ class UsersTable
                 SelectFilter::make('role')
                     ->label('Rol')
                     ->native(false)
-                    ->options(UserRole::class),
+                    ->options(collect(config('crown-cms.roles'))->map(fn (array $role) => $role['label'])),
 
                 Filter::make('is_active')
                     ->label('Toon alleen actieve gebruikers')

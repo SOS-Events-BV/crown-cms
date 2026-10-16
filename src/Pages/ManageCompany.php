@@ -7,12 +7,13 @@ use Filament\Forms\Components\TextInput;
 use Filament\Pages\SettingsPage;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
-use Illuminate\Support\Facades\Auth;
-use SOSEventsBV\CrownCms\Enums\UserRole;
 use SOSEventsBV\CrownCms\Settings\CompanySettings;
+use SOSEventsBV\CrownCms\Traits\HasCrownCmsPagePermissions;
 
 class ManageCompany extends SettingsPage
 {
+    use HasCrownCmsPagePermissions;
+
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBuildingOffice;
 
     protected static string $settings = CompanySettings::class;
@@ -62,15 +63,5 @@ class ManageCompany extends SettingsPage
                     ->numeric()
                     ->required(),
             ]);
-    }
-
-    /**
-     * Can only be accessed by admins.
-     *
-     * @return bool
-     */
-    public static function canAccess(): bool
-    {
-        return Auth::user()->isAdmin();
     }
 }
