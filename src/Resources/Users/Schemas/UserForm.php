@@ -6,9 +6,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use SOSEventsBV\CrownCms\Enums\UserRole;
 
 class UserForm
 {
@@ -41,7 +39,7 @@ class UserForm
 
                 Select::make('role')
                     ->label('Rol')
-                    ->options(UserRole::class)
+                    ->options(collect(config('crown-cms.roles'))->map(fn (array $role) => $role['label']))
                     ->required()
                     ->native(false),
             ]);
