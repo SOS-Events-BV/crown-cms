@@ -50,7 +50,7 @@ trait HasCrownCmsFields
      */
     public function isSuperAdmin(): bool
     {
-        return in_array($this->getRole(), ['admin', 'super_admin']);
+        return $this->getRole() == 'admin' || ($this->getRoleConfig()['super_admin'] ?? false);
     }
 
     /**
@@ -60,7 +60,7 @@ trait HasCrownCmsFields
      */
     public function isAdmin(): bool
     {
-        return in_array($this->getRole(), ['admin', 'super_admin']);
+        return $this->isSuperAdmin();
     }
 
     /**

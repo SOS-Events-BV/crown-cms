@@ -295,6 +295,36 @@ Publish the config and point `views.page` to your own Blade view to customise th
 ],
 ```
 
+### Roles
+
+Roles are defined in the `roles` array of `config/crown-cms.php`. The array key is stored in the `role` column of the
+user, the `label` is shown in the admin panel.
+
+```php
+'roles' => [
+    'admin' => [
+        'label' => 'Administrator',
+        'super_admin' => true, // Grants all permissions
+    ],
+    'editor' => [
+        'label' => 'Editor',
+        'permissions' => [
+            PageResource::class   => ['view', 'create', 'update'],
+            ReviewResource::class => ['view', 'update'],
+            ManageCompany::class  => ['manage'],
+        ],
+    ],
+],
+```
+
+Resources support the `view`, `create`, `update` and `delete` permissions. Filament pages (such as `ManageCompany`)
+only support `manage`. Resources or pages that are not listed are not accessible for that role.
+
+You can check a permission yourself with `$user->hasPermission(PageResource::class, 'update')`.
+
+> Roles used to be defined via the `UserRole` enum. This is deprecated since version 1.2 and will
+> be removed in version 2, where roles will be managed in the admin panel.
+
 ## Credits
 
 - [Steven Roest](https://github.com/stevenemr)
