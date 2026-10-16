@@ -41,6 +41,11 @@ trait HasCrownCmsFields
         return $this->role;
     }
 
+    public function getRoleConfig(): array
+    {
+        return config('crown-cms.roles.' . $this->role);
+    }
+
     /**
      * Returns if the user is a super admin.
      * @return bool
@@ -68,6 +73,21 @@ trait HasCrownCmsFields
     public function isEditor(): bool
     {
         return $this->getRole() == 'editor';
+    }
+
+    /**
+     * Returns if the user has permission to perform an action on a class.
+     * @param string $class
+     * @param string $action
+     * @return bool
+     */
+    public function hasPermission(string $class, string $action): bool
+    {
+        if(empty($this->role)) return false;
+
+        if($this->getRoleConfig()['super_admin'] ?? false) return true;
+
+        return in_array($action, $role['permissions'][$class] ?? []);
     }
 
     /**
