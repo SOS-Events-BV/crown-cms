@@ -10,8 +10,6 @@ use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
-use Illuminate\Support\Facades\Auth;
-use SOSEventsBV\CrownCms\Enums\UserRole;
 
 class ReviewsTable
 {
@@ -50,12 +48,10 @@ class ReviewsTable
             ->recordActions([
                 EditAction::make(),
                 DeleteAction::make()
-                    ->authorize(fn($record) => Auth::user()->isAdmin()),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make()
-                        ->authorize(fn($record) => Auth::user()->isAdmin()),
                 ]),
             ]);
     }

@@ -14,9 +14,12 @@ use SOSEventsBV\CrownCms\Resources\Pages\Pages\EditPage;
 use SOSEventsBV\CrownCms\Resources\Pages\Pages\ListPages;
 use SOSEventsBV\CrownCms\Resources\Pages\Schemas\PageForm;
 use SOSEventsBV\CrownCms\Resources\Pages\Tables\PagesTable;
+use SOSEventsBV\CrownCms\Traits\HasCrownCmsPermissions;
 
 class PageResource extends Resource
 {
+    use HasCrownCmsPermissions;
+
     protected static ?string $model = Page::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;

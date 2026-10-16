@@ -3,11 +3,9 @@
 namespace SOSEventsBV\CrownCms\Traits;
 
 use Filament\Panel;
-use SOSEventsBV\CrownCms\Enums\UserRole;
 
 /**
  * @property bool $is_active
- * @property UserRole $role
  */
 trait HasCrownCmsFields
 {
@@ -34,9 +32,9 @@ trait HasCrownCmsFields
     /**
      * Get the user's role.
      *
-     * @return UserRole
+     * @return string
      */
-    public function getRole(): UserRole
+    public function getRole(): string
     {
         return $this->role;
     }
@@ -83,11 +81,11 @@ trait HasCrownCmsFields
      */
     public function hasPermission(string $class, string $action): bool
     {
-        if(empty($this->role)) return false;
+        if (empty($this->role)) return false;
 
-        if($this->getRoleConfig()['super_admin'] ?? false) return true;
+        if ($this->getRoleConfig()['super_admin'] ?? false) return true;
 
-        return in_array($action, $role['permissions'][$class] ?? []);
+        return in_array($action, $this->getRoleConfig()['permissions'][$class] ?? []);
     }
 
     /**

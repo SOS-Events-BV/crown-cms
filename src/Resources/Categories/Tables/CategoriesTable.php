@@ -12,8 +12,6 @@ use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Auth;
-use SOSEventsBV\CrownCms\Enums\UserRole;
 
 class CategoriesTable
 {
@@ -27,12 +25,13 @@ class CategoriesTable
 
                 TextColumn::make('slug')
                     ->label('Pagina')
-                    ->url(fn($record) => config('crown-cms.routes.category') && $record->is_active ?
-                        route(config('crown-cms.routes.category'), $record->slug) :
-                        null
+                    ->url(
+                        fn($record) => config('crown-cms.routes.category') && $record->is_active ?
+                            route(config('crown-cms.routes.category'), $record->slug) :
+                            null
                     ) // URL that will be opened
                     ->icon(Heroicon::Link)
-                    ->color(fn ($record) => config('crown-cms.routes.category') && $record->is_active ? 'primary' : 'gray')
+                    ->color(fn($record) => config('crown-cms.routes.category') && $record->is_active ? 'primary' : 'gray')
                     ->openUrlInNewTab(),
 
                 ToggleColumn::make('is_active')
@@ -48,12 +47,10 @@ class CategoriesTable
             ->recordActions([
                 EditAction::make(),
                 DeleteAction::make()
-                    ->authorize(fn($record) => Auth::user()->isAdmin()),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make()
-                        ->authorize(fn($record) => Auth::user()->isAdmin()),
                 ]),
             ]);
     }

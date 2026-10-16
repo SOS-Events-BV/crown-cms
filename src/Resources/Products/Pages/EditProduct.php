@@ -33,7 +33,6 @@ class EditProduct extends EditRecord
         return [
             PreviewAction::make(), // This adds the preview button to the product
             DeleteAction::make()
-                ->authorize(fn($record) => Auth::user()->isAdmin()),
         ];
     }
 }
