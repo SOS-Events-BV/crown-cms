@@ -19,7 +19,6 @@ trait HasCrownCmsFields
     protected function initializeHasCrownCmsFields(): void
     {
         $this->mergeFillable(['is_active', 'role']);
-        $this->mergeCasts(['role' => UserRole::class]);
     }
 
     /**
@@ -43,21 +42,32 @@ trait HasCrownCmsFields
     }
 
     /**
+     * Returns if the user is a super admin.
+     * @return bool
+     */
+    public function isSuperAdmin(): bool
+    {
+        return in_array($this->getRole(), ['admin', 'super_admin']);
+    }
+
+    /**
      * Returns if the user is an Admin.
+     * @deprecated since 1.2, will be removed in 2.0. Please use $user->isSuperAdmin() instead.
      * @return bool
      */
     public function isAdmin(): bool
     {
-        return $this->getRole() === UserRole::Admin;
+        return in_array($this->getRole(), ['admin', 'super_admin']);
     }
 
     /**
      * Returns if the user is an Editor.
+     * @deprecated since 1.2, will be removed in 2.0. Please use $user->getRole() or $user->hasPermission() instead.
      * @return bool
      */
     public function isEditor(): bool
     {
-        return $this->getRole() === UserRole::Editor;
+        return $this->getRole() == 'editor';
     }
 
     /**

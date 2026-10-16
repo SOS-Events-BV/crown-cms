@@ -1,5 +1,12 @@
 <?php
 
+use SOSEventsBV\CrownCms\Resources\Categories\CategoryResource;
+use SOSEventsBV\CrownCms\Resources\Events\EventResource;
+use SOSEventsBV\CrownCms\Resources\FaqPageQuestions\FaqPageQuestionResource;
+use SOSEventsBV\CrownCms\Resources\Pages\PageResource;
+use SOSEventsBV\CrownCms\Resources\Products\ProductResource;
+use SOSEventsBV\CrownCms\Resources\Reviews\ReviewResource;
+
 // config for SOSEventsBV/CrownCms
 return [
     // Name of the app
@@ -23,6 +30,28 @@ return [
      */
     'models' => [
         'user' => \App\Models\User::class
+    ],
+
+    /**
+     * Add roles to use in the CMS panel
+     */
+    'roles' => [
+        'admin' => [
+            'label' => 'Administrator',
+            'super_admin' => true
+        ],
+        'editor' => [
+            'label' => 'Editor',
+            'permissions' => [
+                PageResource::class            => ['view', 'create', 'update'],
+                CategoryResource::class        => ['view', 'create', 'update'],
+                ProductResource::class         => ['view', 'create', 'update'],
+                EventResource::class           => ['view', 'create', 'update'],
+                FaqPageQuestionResource::class => ['view', 'create', 'update'],
+                ReviewResource::class          => ['view', 'update'],
+            ]
+        ],
+        // ... (Add more roles here)
     ],
 
     /**
